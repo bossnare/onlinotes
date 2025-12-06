@@ -1,4 +1,4 @@
-# ONLYNOTES
+# NOTI
 
 Small app to create notes online
 
@@ -6,4 +6,4 @@ Small app to create notes online
 
 - React Vite
 - Bun server
-- Supabase
+- Drizzle & SQLite

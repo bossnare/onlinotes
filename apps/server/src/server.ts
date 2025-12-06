@@ -43,11 +43,11 @@ const server = serve({
     },
     '/api/notes/create': {
       async PUT(req) {
-        const body = '';
+        const body = (await req.json()) as { title: string; content: string };
         await db.insert(notes).values({
           id: uuid(),
-          title: '',
-          content: '',
+          title: body.title,
+          content: body.content,
         });
         return Response.json({});
       },
