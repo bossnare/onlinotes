@@ -6,9 +6,9 @@ export const Logo = ({ className }: { className?: string }) => {
       <img
         src="./icon_32x32_mono.svg"
         alt="Memo"
-        className="size-6 md:size-8"
+        className="size-6 md:size-7"
       />
-      <span className="text-[21px] font-extrabold leading-none tracking-tight select-none md:text-3xl">
+      <span className="text-[21px] font-extrabold leading-none tracking-tight select-none md:text-2xl">
         memoroom
       </span>
     </div>

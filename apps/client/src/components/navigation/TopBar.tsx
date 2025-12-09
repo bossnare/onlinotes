@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
-import { NavTab } from './NavTab';
-import { TextAlignJustify, Plus, Search } from 'lucide-react';
+import { TextAlignJustify, Ellipsis, Search } from 'lucide-react';
 import { Logo } from '../brand/Logo';
+import { useState } from 'react';
 
 export const TopBar = ({
   setOpenSide,
@@ -10,16 +10,15 @@ export const TopBar = ({
   setOpenSide: React.Dispatch<React.SetStateAction<boolean>>;
   openSide: boolean;
 }) => {
+  const [openMenu, setOpenMenu] = useState(false);
+
   return (
-    <nav
-      style={{ backgroundColor: '#000' }}
-      className="sticky inset-x-0 top-0 flex items-center gap-2 px-2 py-1 pl-1 border-b h-14 md:px-4 bg-linear-to-b from-zinc-950/80 to-zinc-950/80 border-zinc-800"
-    >
+    <nav className="sticky inset-x-0 top-0 flex items-center gap-2 px-2 py-1 pl-1 border-b h-14 md:px-3 bg-zinc-950 border-zinc-800">
       <div className="flex items-center gap-2 shrink-0">
         {/* mobile menu button */}
         <button
           onClick={() => setOpenSide(!openSide)}
-          className="p-2 rounded-full bg-zinc-950 md:hidden active:opacity-80 active:bg-black/80 md:hover:bg-black/80 md:hover:opacity-80"
+          className="p-2 rounded-full md:hidden active:opacity-80 active:bg-zinc-800 md:hover:bg-zinc-800 md:hover:opacity-80"
         >
           <TextAlignJustify />
         </button>
@@ -37,22 +36,40 @@ export const TopBar = ({
       </div>
       <div className="flex items-center justify-end gap-3 md:gap-4 grow">
         <div className="hidden rounded-full size-10 md:flex bg-zinc-900"></div>
-        <button className="p-2 rounded-full md:hidden bg-zinc-800 active:opacity-80 active:bg-black/80 md:hover:bg-black/80 md:hover:opacity-80">
-          <Plus />
+        <button
+          onClick={() => setOpenMenu(!openMenu)}
+          className="p-2 rounded-full md:hidden active:bg-zinc-900 active:opacity-80 md:hover:bg-zinc-900 md:hover:opacity-80"
+        >
+          <Ellipsis />
         </button>
       </div>
 
       {/* mobile navigation tab */}
-      {openSide && (
+      {openMenu && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           // transition={{type}}
-          className="fixed w-2/3 p-2 rounded-lg shadow-xl sm:w-1/2 bg-zinc-950 top-14 right-3 md:hidden"
+          className="fixed w-1/2 p-2 rounded-lg shadow-xl sm:w-1/2 bg-zinc-950 top-16 right-3 md:hidden"
         >
           <ul className="flex flex-col gap-1">
-            <NavTab />
+            <li>
+              <button className="flex w-full gap-2 px-2 h-9">
+                Workspaces settings
+              </button>
+            </li>
+            <li>
+              <button className="flex w-full gap-2 px-2 h-9">
+                Account health
+              </button>
+            </li>
+            <li>
+              <button className="flex w-full gap-2 px-2 h-9">Archives</button>
+            </li>
+            <li>
+              <button className="flex w-full gap-2 px-2 h-9">Trash</button>
+            </li>
           </ul>
         </motion.div>
       )}
