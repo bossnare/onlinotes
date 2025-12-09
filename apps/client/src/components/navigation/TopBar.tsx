@@ -11,7 +11,10 @@ export const TopBar = ({
   openSide: boolean;
 }) => {
   return (
-    <nav className="sticky inset-x-0 top-0 flex items-center gap-2 px-2 py-1 pl-1 border-b h-13 rounded-b-xl md:px-4 md:h-14 bg-zinc-950/80 border-zinc-800">
+    <nav
+      style={{ backgroundColor: '#000' }}
+      className="sticky inset-x-0 top-0 flex items-center gap-2 px-2 py-1 pl-1 border-b h-14 md:px-4 bg-linear-to-b from-zinc-950/80 to-zinc-950/80 border-zinc-800"
+    >
       <div className="flex items-center gap-2 shrink-0">
         {/* mobile menu button */}
         <button
