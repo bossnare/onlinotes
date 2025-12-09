@@ -70,14 +70,14 @@ function App() {
         </main>
       </div>
 
-      <div className="fixed bottom-20 md:bottom-6 right-4">
+      <div className="fixed bottom-24 md:bottom-6 right-4">
         <button className="flex items-center justify-center p-2 bg-blue-800 rounded-full size-14 active:opacity-80 md:hover:opacity-80">
           <PenLine className="size-auto" />
         </button>
       </div>
 
       {/* BottomBar */}
-      <div className="fixed inset-x-0 bottom-0 h-16 px-2 border-t bg-zinc-950/80 backdrop-blur-sm md:hidden border-zinc-800">
+      <div className="fixed inset-x-0 bottom-0 h-16 px-2 border-t bg-zinc-950/94 backdrop-blur-sm md:hidden border-zinc-800">
         <nav className="select-none size-full">
           <ul className="flex items-center justify-around size-full">
             <NavTab />
