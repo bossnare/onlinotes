@@ -79,7 +79,7 @@ function App() {
       >
         <TopBar setOpenSide={setOpenSide} openSide={openSide} />
 
-        <main className="h-[calc(100dvh-3.5rem)] bg-linear-to-b from-zinc-950/50 to-zinc-950/20 overflow-y-auto px-2 grid grid-cols-4 items-start gap-2">
+        <main className="h-[calc(100dvh-3.5rem)] bg-linear-to-b from-background to-background/20 overflow-y-auto px-2 grid grid-cols-4 items-start gap-2">
           <div className="flex justify-center py-6 col-span-full">
             <div className="flex flex-col items-center justify-center w-full gap-4 p-10 rounded-lg md:w-2/3 bg-muted">
               <h4 className="text-lg font-black">Browse your notes</h4>
