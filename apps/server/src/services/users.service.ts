@@ -1,7 +1,7 @@
 import { db } from '@/db';
-import {  users } from '@/db/schema';
+import { users } from '@/db/schema';
 import type { NewUser, User, Note } from '@/types/base.type';
-import argon2 from 'argon2';
+import bcrypt from 'bcryptjs';
 import { eq } from 'drizzle-orm';
 import { NotesService } from './notes.service';
 
@@ -29,7 +29,7 @@ export const UsersService = {
   },
 
   async create(body: NewUser) {
-    const hashedPassword = await argon2.hash(body.password);
+    const hashedPassword = await bcrypt.hash(body.password, 10);
     const user = await db
       .insert(users)
       .values({

@@ -1,6 +1,6 @@
 import type { JWTPayload, LoginPayload } from '@/types/auth.type';
 import jwt from 'jsonwebtoken';
-import argon2 from 'argon2';
+import bcrypt from 'bcryptjs';
 import { db } from '@/db';
 import { eq } from 'drizzle-orm';
 import { users } from '@/db/schema';
@@ -23,7 +23,7 @@ export const AuthService = {
     if (!currentUser) {
       throw new Error('User Not Found !');
     }
-    const pwMatch = await argon2.verify(currentUser.password, body.password);
+    const pwMatch = await bcrypt.compare(body.password, currentUser.password);
     if (!pwMatch) {
       throw new Error('Invalid credentials !');
     } else {
