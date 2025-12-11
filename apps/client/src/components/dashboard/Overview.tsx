@@ -66,7 +66,7 @@ function Overview() {
           ref={sideBarRef}
           className={`${
             openSide ? 'scale-100 opacity-100 z-999' : 'scale-80 opacity-0 z-1'
-          } md:hidden transition-transform will-change-transform duration-200 ease-in-out w-5/6 bg-black fixed inset-y-0 border-r border-zinc-800 rounded-r-2xl flex items-center justify-center`}
+          } md:hidden transition-transform will-change-transform duration-200 ease-in-out w-6/8 bg-black fixed inset-y-0 border-r border-zinc-800 rounded-r-2xl flex items-center justify-center`}
         >
           <div className="border-4 rounded-full border-zinc-100 size-20 animate-spin border-t-transparent"></div>
         </div>
