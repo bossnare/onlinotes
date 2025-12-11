@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import Overview from './components/dashboard/Overview';
-import { Login } from './components/auth/Login';
+import Overview from '@/components/dashboard/Overview';
+import { Login } from '@/components/auth/Login';
 
 export const AppRoutes = () => {
   return (
