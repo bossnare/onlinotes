@@ -1,12 +1,12 @@
 import { Earth, PenLine, Plus } from 'lucide-react';
-import { Logo } from '../brand/Logo';
-import { TopBar } from '../navigation/TopBar';
-import { Button } from '../ui/button';
-import { NavTab } from '../navigation/NavTab';
+import { Logo } from '@/components/brand/Logo';
+import { TopBar } from '@/components/navigation/TopBar';
+import { Button } from '@/components/ui/button';
+import { NavTab } from '@/components/navigation/NavTab';
 import { useEffect, useRef, useState } from 'react';
-import { useIsMobile } from '../../hooks/use-mobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { motion } from 'motion/react';
-import { waitVibrate } from '../../utils/vibration';
+import { waitVibrate } from '@/utils/vibration';
 
 // type Note = {
 //   id: string;
@@ -66,14 +66,17 @@ function Overview() {
           ref={sideBarRef}
           className={`${
             openSide ? 'translate-x-0' : '-translate-x-full'
-          } md:hidden transition-transform will-change-transform duration-200 z-50 ease-in-out w-5/6 bg-black fixed inset-y-0 border-r border-zinc-800 rounded-r-2xl overflow-hidden`}
+          } md:hidden transition-transform will-change-transform duration-200 p-4 z-50 ease-in-out w-5/6 bg-black fixed inset-y-0 border-r border-zinc-800 rounded-r-2xl overflow-hidden`}
         >
           <aside
             className={`${
-              openSide ? 'scale-100' : 'scale-0'
-            } size-full tansition-transform will-change-transform duration-250 ease-in-out overflow-y-auto flex items-center justify-center`}
+              openSide ? 'scale-100' : 'scale-20'
+            } size-full tansition-transform will-change-transform duration-250 rounded-xl flex-col space-y-3 *:h-20 *:w-full *:bg-muted/60 *:rounded-lg ease-in-out overflow-y-auto flex items-center`}
           >
-            <div className="border-4 rounded-full border-zinc-100 size-20 animate-spin border-t-transparent"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </aside>
         </div>
 

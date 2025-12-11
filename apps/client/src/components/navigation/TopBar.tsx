@@ -1,9 +1,9 @@
 import { motion } from 'motion/react';
 import { TextAlignJustify, Ellipsis, Search } from 'lucide-react';
-import { Logo } from '../brand/Logo';
+import { Logo } from '@/components/brand/Logo';
 import { useState } from 'react';
-import { ButtonIcon } from '../ui/button';
-import { waitVibrate } from '../../utils/vibration';
+import { ButtonIcon } from '@/components/ui/button';
+import { waitVibrate } from '@/utils/vibration';
 
 export const TopBar = ({
   setOpenSide,
