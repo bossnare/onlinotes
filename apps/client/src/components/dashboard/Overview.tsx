@@ -1,27 +1,21 @@
-import { Earth, PenLine, Plus } from 'lucide-react';
+import { supabase } from '@/auth-services/clients.service';
 import { Logo } from '@/components/brand/Logo';
+import { NavTab } from '@/components/navigation/NavTab';
 import { TopBar } from '@/components/navigation/TopBar';
 import { Button } from '@/components/ui/button';
-import { NavTab } from '@/components/navigation/NavTab';
-import { useEffect, useRef, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { motion } from 'motion/react';
+import { useAuth } from '@/hooks/use-session';
 import { waitVibrate } from '@/utils/vibration';
-import { useUser } from '@/api/user.api';
-import { AuthService } from '@/auth-services/clients.service';
-
-// type Note = {
-//   id: string;
-//   title: string;
-//   content: string;
-// };
+import { Earth, PenLine, Plus } from 'lucide-react';
+import { motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 
 function Overview() {
   const [openSide, setOpenSide] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(0);
   const sideBarRef = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
-  const { data: me } = useUser();
+  const { user } = useAuth();
 
   useEffect(() => {
     if (sideBarRef.current) {
@@ -33,33 +27,30 @@ function Overview() {
     <>
       <div className="relative max-h-screen overflow-hidden h-dvh">
         {/* sidebar */}
-        <div className="fixed inset-y-0 z-20 hidden w-64 overflow-y-auto scrollbar-none border-r md:block border-zinc-800">
-          <aside className="relative px-2 space-y-1 size-full">
-            <Logo className="sticky top-0 hidden w-full py-3 bg-black/80 backdrop-blur-sm md:flex" />
-            <nav className="pb-2 rounded-md bg-muted">
+        <div className="fixed inset-y-0 z-20 hidden w-64 border-r md:block border-zinc-800">
+          <Logo className="sticky px-4 top-0 hidden w-full py-3 bg-black md:flex" />
+
+          <aside className="relative px-2 space-y-1 w-full h-[calc(100%-8%)] overflow-y-auto scrollbar-none">
+            <nav className="pb-2 rounded-md bg-muted ">
               <ul className="flex flex-col space-y-2">
                 <NavTab />
               </ul>
             </nav>
 
-            <div className="absolute flex-col gap-2 inset-x-0 bottom-0 flex items-center px-2 bg-linear-to-b from-transparent via-zinc-950/20 to-zinc-950 h-15">
-              <div
-                onClick={() => AuthService.githubSign()}
-                className="w-full active:bg-zinc-900"
-              >
+            <div className="absolute flex-col gap-3 pb-6 inset-x-0 bottom-0 flex items-center px-2 bg-linear-to-b from-transparent via-zinc-950/20 to-zinc-950 min-h-15">
+              <div className="w-full active:bg-zinc-900">
                 <Button size="medium" className="w-full">
                   <Plus /> Create new note
                 </Button>
               </div>
-              <div
-                onClick={() => AuthService.googleSign()}
-                className="w-full active:bg-zinc-900"
-              >
+              {/* prov logout */}
+              <div className="w-full active:bg-zinc-900">
                 <Button
+                  onClick={async () => await supabase.auth.signOut()}
                   size="medium"
-                  className="w-full bg-foreground text-zinc-950"
+                  className="w-full bg-muted/90 text-foreground/90 font-normal border border-zinc-800"
                 >
-                  <Plus /> With Google
+                  Logout
                 </Button>
               </div>
             </div>
@@ -117,7 +108,7 @@ function Overview() {
             <div className="flex justify-center py-6 col-span-full">
               <div className="flex flex-col items-center justify-center w-full gap-4 p-10 rounded-lg md:w-2/3 bg-muted">
                 <h4 className="text-lg font-black">
-                  Good morning {me?.username}
+                  Good morning {user?.email}
                 </h4>
                 <p className="text-sm text-center text-muted-foreground">
                   If you click this browse button, your Overview system down
@@ -139,7 +130,7 @@ function Overview() {
             exit={{ opacity: 0, y: -10 }}
             className="fixed bottom-24 md:bottom-6 right-4"
           >
-            <button className="flex items-center justify-center p-2 bg-blue-800 rounded-full shadow-lg shadow-blue-800/30 md:shadow-blue-800/20 size-14 active:opacity-80 md:hover:opacity-80">
+            <button className="flex items-center justify-center p-2 bg-primary rounded-full shadow-md shadow-primary/30 md:shadow-blue-800/20 size-14 active:opacity-80 md:hover:opacity-80">
               <PenLine className="size-auto" />
             </button>
           </motion.div>

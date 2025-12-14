@@ -1,31 +1,39 @@
 import { Routes, Route } from 'react-router-dom';
 import Overview from '@/components/dashboard/Overview';
 import { Login } from '@/components/auth/Login';
-import { supabase } from './auth-services/clients.service';
+import { Button } from '@/components/ui/button';
+import { AuthService } from './auth-services/clients.service';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const AppRoutes = ({ session }: { session: any }) => {
+export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route
-        path="/dashboard"
+        path="/"
         element={
-          <div className="flex flex-col items-center justify-center py-4 space-y-4 text-xl font-bold">
-            Welcome to your dashboard{' '}
-            <span className="font-medium text-muted-foreground">
-              {session?.user.email}
+          <div className="flex flex-col items-center justify-center py-4 space-y-6">
+            <span className="text-xl font-bold flex items-center gap-2">
+              <img src="/icon_32x32.svg" className="size-7" alt="Logo" />{' '}
+              <h2>Sign in</h2>{' '}
             </span>
-            <button
-              className="px-4 py-2 text-base font-medium rounded-md bg-zinc-900"
-              onClick={() => supabase.auth.signOut()}
-            >
-              Logout
-            </button>
+            <div className="flex md:flex-row flex-col gap-4">
+              <Button
+                className="bg-foreground text-background"
+                onClick={() => AuthService.googleSign()}
+              >
+                Continue with Google
+              </Button>
+              <Button
+                className="bg-foreground text-background"
+                onClick={() => AuthService.githubSign()}
+              >
+                Continue with GitHub
+              </Button>
+            </div>
           </div>
         }
       />
-      <Route path="/" element={<Overview />} />
+      <Route path="/dashboard" element={<Overview />} />
     </Routes>
   );
 };
