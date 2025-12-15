@@ -4,9 +4,11 @@ import { NavTab } from '@/components/navigation/NavTab';
 import { TopBar } from '@/components/navigation/TopBar';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useToggle } from '@/hooks/use-toggle';
+import { cn } from '@/lib/utils';
 import RefreshWrapper from '@/pull-to-refresh';
 import { waitVibrate } from '@/utils/vibration';
-import { PenLine, Plus } from 'lucide-react';
+import { PenLine, Plus, ChevronUp, ChevronDown } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
@@ -16,6 +18,7 @@ function DashboardLayout() {
   const [sidebarWidth, setSidebarWidth] = useState(0);
   const sideBarRef = useRef<HTMLDivElement | null>(null);
   const isMobile = useIsMobile();
+  const { value: isOpen, toggle: toggleOpen } = useToggle(true);
 
   useEffect(() => {
     if (sideBarRef.current) {
@@ -39,57 +42,72 @@ function DashboardLayout() {
 
             <fieldset
               name="theme"
-              className="flex border-t border-sidebar-border mt-6 pt-4 flex-col px-3 gap-4 *:flex *:justify-between"
+              className="px-2 pt-4 mt-4 border-t border-sidebar-border"
             >
-              <h3>Theme</h3>
-              <div>
-                <input
-                  id="system"
-                  name="theme"
-                  value="system"
-                  type="radio"
-                  className="cursor-pointer"
-                />{' '}
-                <label
-                  htmlFor="system"
-                  className="cursor-pointer text-muted-foreground md:text-sm"
-                >
-                  System
-                </label>
-              </div>
-              <div>
-                <input
-                  id="light"
-                  name="theme"
-                  value="light"
-                  type="radio"
-                  className="cursor-pointer"
-                />{' '}
-                <label
-                  htmlFor="light"
-                  className="cursor-pointer text-muted-foreground md:text-sm"
-                >
-                  Light
-                </label>
-              </div>
-              <div>
-                <input
-                  id="dark"
-                  name="theme"
-                  value="dark"
-                  type="radio"
-                  className="cursor-pointer"
-                />{' '}
-                <label
-                  htmlFor="dark"
-                  className="cursor-pointer text-muted-foreground md:text-sm"
-                >
-                  Dark
-                </label>
+              <button
+                onClick={toggleOpen}
+                className="flex items-center justify-between w-full py-2 duration-200 rounded md:active:bg-muted-foreground/40 tansition-colors active:bg-muted md:hover:bg-muted"
+              >
+                <span>Theme</span>
+                <span className="mr-1">
+                  {isOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+              </button>
+              <div
+                className={cn(
+                  isOpen ? 'h-24' : 'h-0',
+                  'flex transition-all duration-200 ease-in-out overflow-hidden flex-col px-1 mt-2 gap-4 *:flex *:justify-between'
+                )}
+              >
+                <div>
+                  <input
+                    id="system"
+                    name="theme"
+                    value="system"
+                    type="radio"
+                    className="cursor-pointer"
+                  />{' '}
+                  <label
+                    htmlFor="system"
+                    className="font-medium cursor-pointer text-muted-foreground md:text-sm"
+                  >
+                    System
+                  </label>
+                </div>
+                <div>
+                  <input
+                    id="light"
+                    name="theme"
+                    value="light"
+                    type="radio"
+                    className="cursor-pointer"
+                  />{' '}
+                  <label
+                    htmlFor="light"
+                    className="font-medium cursor-pointer text-muted-foreground md:text-sm"
+                  >
+                    Light
+                  </label>
+                </div>
+                <div>
+                  <input
+                    id="dark"
+                    name="theme"
+                    value="dark"
+                    type="radio"
+                    className="cursor-pointer"
+                  />{' '}
+                  <label
+                    htmlFor="dark"
+                    className="font-medium cursor-pointer text-muted-foreground md:text-sm"
+                  >
+                    Dark
+                  </label>
+                </div>
               </div>
             </fieldset>
 
-            <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 px-4 pb-6 bg-linear-to-b from-transparent via-zinc-950/20 to-zinc-950/80 min-h-15">
+            <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 px-4 pb-6 bg-linear-to-b from-transparent via-zinc-950/20 to-zinc-950/40 dark:to-zinc-950/80 min-h-15">
               <div className="w-full active:bg-muted">
                 <Button size="medium" className="w-full">
                   <Plus /> Create new note
