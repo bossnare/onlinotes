@@ -85,9 +85,7 @@ function DashboardLayout() {
           } md:hidden transition-transform will-change-transform duration-200 p-4 z-50 ease-in-out w-5/6 bg-background fixed inset-y-0 border-r border-border rounded-r-2xl overflow-hidden`}
         >
           <aside
-            className={`${
-              openSide ? 'scale-100' : 'scale-20'
-            } size-full tansition-transform will-change-transform duration-250 rounded-xl ease-in-out overflow-y-auto`}
+            className={`size-full rounded-xl overflow-y-auto`}
           >
             <div className="flex items-center gap-3 mb-4">
               <img
