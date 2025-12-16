@@ -21,12 +21,12 @@ const miniNavLabel = [
     icon: UserCog,
   },
   {
-    id: 1,
+    id: 3,
     label: 'Archives',
     icon: Archive,
   },
   {
-    id: 1,
+    id: 4,
     label: 'Trash',
     icon: Trash,
   },
