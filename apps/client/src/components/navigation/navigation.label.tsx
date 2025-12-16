@@ -3,10 +3,10 @@ import {
   UserCog,
   Trash,
   Archive,
-  Bell,
-  Layers,
   Search,
+  Layers,
   Tags,
+  Bell,
 } from 'lucide-react';
 
 const miniNavLabel = [
@@ -42,7 +42,7 @@ const tabLabel = [
   {
     id: 2,
     label: 'Search',
-    icon: Search,
+    icon: MagnifyingGlassIcon,
     route: '/dashboard/search',
   },
   {
