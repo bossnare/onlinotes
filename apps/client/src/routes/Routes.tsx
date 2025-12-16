@@ -5,10 +5,11 @@ import { ProtectedRoutes } from './ProtectedRoutes';
 import DashboardLayout from '@/components/dashboard/DashboardLayout';
 import { useAuth } from '@/hooks/use-auth';
 import { PublicLayout } from './PublicLayout';
+import { useIsPublicRoute } from '@/hooks/useIsPublicRoute';
 
 export const AppRoutes = () => {
   const { pending, session } = useAuth();
-
+  console.log(useIsPublicRoute);
   return (
     <>
       {pending ? (
