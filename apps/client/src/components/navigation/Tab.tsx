@@ -22,10 +22,10 @@ export const Tab = ({
       {label === 'Search' ? (
         <Icon
           weight={isActive ? 'fill' : 'bold'}
-          className="md:size-6 size-7 rounded-md"
+          className="md:size-5 size-7 rounded-md"
         />
       ) : (
-        <Icon className="md:size-6 size-7 rounded-md" />
+        <Icon className="md:size-5 size-7 rounded-md" />
       )}
       <span className="hidden md:block">{label}</span>
       {/* underline */}

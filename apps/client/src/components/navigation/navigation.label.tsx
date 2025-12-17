@@ -1,11 +1,11 @@
 import {
-  Settings,
-  UserCog,
-  Trash,
   Archive,
-  Layers,
-  Tags,
   Bell,
+  Layers,
+  Settings,
+  Tags,
+  Trash,
+  UserCog,
 } from 'lucide-react';
 
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
@@ -13,7 +13,7 @@ import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 const miniNavLabel = [
   {
     id: 1,
-    label: 'Worksape settings',
+    label: 'Workspace settings',
     icon: Settings,
   },
   {
@@ -38,25 +38,25 @@ const tabLabel = [
     id: 1,
     label: 'Overview',
     icon: Layers,
-    route: '/dashboard',
+    route: '/app',
   },
   {
     id: 2,
     label: 'Search',
     icon: MagnifyingGlassIcon,
-    route: '/dashboard/search',
+    route: '/app/search',
   },
   {
     id: 1,
     label: 'Notofications',
     icon: Bell,
-    route: '/dashboard/notification',
+    route: '/app/notification',
   },
   {
     id: 1,
     label: 'Tags',
     icon: Tags,
-    route: '/dashboard/tags',
+    route: '/app/tags',
   },
 ];
 
