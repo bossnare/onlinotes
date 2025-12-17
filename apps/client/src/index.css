@@ -2,7 +2,8 @@
 @import './styles/themes.css';
 
 @layer base {
-  body {
+  body,
+  html {
     @apply relative overflow-hidden font-sans overscroll-none bg-background text-foreground;
     font-synthesis: none;
     text-rendering: optimizeLegibility;

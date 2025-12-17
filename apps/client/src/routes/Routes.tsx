@@ -1,12 +1,13 @@
-import { Login } from '@/components/auth/Login';
-import Overview from '@/components/dashboard/Overview';
+import DashboardLayout from '@/app/DashboardLayout';
+import Overview from '@/app/page/Overview';
+import { Login } from '@/auth/page/Login';
+import { HomeScreenLoader } from '@/components/HomeScreenLoader';
+import { useAuth } from '@/hooks/use-auth';
+import { useIsPublicRoute } from '@/hooks/useIsPublicRoute';
 import { Route, Routes } from 'react-router-dom';
 import { ProtectedRoutes } from './ProtectedRoutes';
-import DashboardLayout from '@/components/dashboard/DashboardLayout';
-import { useAuth } from '@/hooks/use-auth';
-import { PublicLayout } from './PublicLayout';
-import { useIsPublicRoute } from '@/hooks/useIsPublicRoute';
-import { HomeScreenLoader } from '@/components/HomeScreenLoader';
+import { PublicLayout } from '../auth/PublicLayout';
+import { NotFound } from '@/components/not-found';
 
 export const AppRoutes = () => {
   const { pending, session } = useAuth();
@@ -25,7 +26,7 @@ export const AppRoutes = () => {
           </Route>
           {/* protected */}
           <Route element={<ProtectedRoutes session={session} />}>
-            <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route path="/app" element={<DashboardLayout />}>
               <Route index element={<Overview />} />
               <Route path="search" element={<div>Search Route</div>} />
               <Route
@@ -35,6 +36,8 @@ export const AppRoutes = () => {
               <Route path="tags" element={<div>Tags Route</div>} />
             </Route>
           </Route>
+          {/* bad route */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       )}
     </>

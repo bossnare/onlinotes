@@ -1,17 +1,17 @@
-import { supabase } from '@/auth-services/clients.service';
 import { Logo } from '@/components/brand/Logo';
 import { NavTab } from '@/components/navigation/NavTab';
 import { TopBar } from '@/components/navigation/TopBar';
 import { Button, ButtonIcon } from '@/components/ui/button';
+import { ToggleTheme } from '@/components/ui/toggle-theme';
+import { useAuth } from '@/hooks/use-auth';
 import { useIsMobile } from '@/hooks/use-mobile';
 import RefreshWrapper from '@/pull-to-refresh';
+import { supabase } from '@/services/auth-client.service';
 import { waitVibrate } from '@/utils/vibration';
 import { PenLine, Plus, Settings } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { ToggleTheme } from '@/components/ui/toggle-theme';
-import { useAuth } from '@/hooks/use-auth';
 
 function DashboardLayout() {
   const [openSide, setOpenSide] = useState(false);
@@ -34,20 +34,20 @@ function DashboardLayout() {
         <div className="fixed inset-y-0 z-20 hidden w-64 border-r bg-sidebar md:block border-sidebar-border">
           <Logo className="sticky top-0 hidden w-full px-5 py-3 md:flex" />
 
-          <aside className="relative text-sidebar-foreground space-y-1 px-3 w-full h-[calc(100%-8%)] overflow-y-auto scrollbar-none">
+          <aside className="relative text-sidebar-foreground space-y-4 px-3 w-full h-[calc(100%-8%)] overflow-y-auto scrollbar-none">
             <nav className="mt-1 rounded-md">
               <ul className="flex flex-col gap-2">
                 <NavTab />
               </ul>
             </nav>
 
-            <div className="h-1 my-6 border-t border-sidebar-border"></div>
+            <div className="h-1 my-2 border-t border-sidebar-border"></div>
 
             <ToggleTheme />
 
             <div className="absolute inset-x-0 bottom-0 flex flex-col items-center gap-2 px-4 pb-6 bg-linear-to-b from-transparent via-zinc-950/20 to-zinc-950/10 dark:to-zinc-950/80 min-h-15">
               <div className="w-full active:bg-muted">
-                <Button size="medium" className="w-full">
+                <Button className="w-full bg-secondary text-secondary-foreground">
                   <Plus /> Create new note
                 </Button>
               </div>
@@ -113,7 +113,7 @@ function DashboardLayout() {
             <div className="absolute inset-x-0 w-full px-2 bottom-2 active:bg-muted">
               <Button
                 onClick={async () => await supabase.auth.signOut()}
-                size="medium"
+                size="large"
                 className="w-full font-normal border bg-muted text-foreground/90 border-input"
               >
                 Logout
@@ -151,9 +151,9 @@ function DashboardLayout() {
             exit={{ opacity: 0, y: -10 }}
             className="fixed bottom-24 md:bottom-12 right-4"
           >
-            <button className="flex items-center justify-center p-2 text-white rounded-full shadow-md bg-primary size-14 active:opacity-80 md:hover:opacity-80">
+            <ButtonIcon className="text-white shadow-lg bg-primary size-14 md:hover:bg-primary">
               <PenLine className="size-auto" />
-            </button>
+            </ButtonIcon>
           </motion.div>
         )}
 
@@ -171,7 +171,7 @@ function DashboardLayout() {
           className="fixed inset-x-0 bottom-0 z-20 h-16 py-2 transition-transform duration-200 ease-in-out border-t bg-sidebar backdrop-blur-sm md:hidden border-sidebar-border"
         >
           <nav className="select-none size-full">
-            <ul className="flex items-center justify-around size-full pb-1">
+            <ul className="flex items-center justify-around pb-1 size-full">
               <NavTab />
             </ul>
           </nav>

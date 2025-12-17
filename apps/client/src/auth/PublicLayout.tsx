@@ -1,9 +1,9 @@
-import { Navigate, Outlet } from 'react-router-dom';
 import type { Session } from '@supabase/supabase-js';
+import { Navigate, Outlet } from 'react-router-dom';
 
 export const PublicLayout = ({ session }: { session: Session | null }) => {
   if (session) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/app" replace />;
   }
 
   return <Outlet />;
