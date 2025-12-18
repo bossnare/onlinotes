@@ -1,5 +1,5 @@
 import { Logo } from '@/components/brand/Logo';
-import { ButtonIcon } from '@/components/ui/button';
+import { ButtonIcon, Button } from '@/components/ui/button';
 import { useToggle } from '@/hooks/use-toggle';
 import { landingMenuVariants } from '@/motions/motion.variant';
 import { TextAlignJustify, X } from 'lucide-react';
@@ -22,11 +22,26 @@ export const LandingPage = () => {
             <ButtonIcon onClick={toggleOpenMenu} className="md:hidden">
               <TextAlignJustify className="size-[26px]" />
             </ButtonIcon>
+
+            <div className="hidden gap-3 md:flex">
+              <Button
+                size="medium"
+                className="shadow-xs bg-input text-foreground/80"
+              >
+                Sign up
+              </Button>
+              <Button
+                size="medium"
+                className="bg-secondary text-secondary-foreground"
+              >
+                Sign in
+              </Button>
+            </div>
           </div>
         </nav>
       </header>
       {/* main */}
-      <main className="px-4 py-2">Landing page</main>
+      <main className="px-4 py-2"></main>
 
       {/* mobile menu content */}
       <AnimatePresence>
