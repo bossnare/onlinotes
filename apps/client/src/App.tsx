@@ -4,6 +4,7 @@ import { AppRoutes } from './routes/Routes';
 import { useIsPublicRoute } from './hooks/useIsPublicRoute';
 import { useEffect } from 'react';
 import { useTheme } from './hooks/use-theme';
+import { UXProvider } from './contexts/UXContext';
 
 function App() {
   const isPublicRoute = useIsPublicRoute();
@@ -23,7 +24,9 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AppRoutes />
+      <UXProvider>
+        <AppRoutes />
+      </UXProvider>
 
       {/* vercel services */}
       <Analytics />

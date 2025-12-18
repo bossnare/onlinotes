@@ -6,26 +6,23 @@ import { Button, ButtonIcon } from '../ui/button';
 import { sideBarLabel } from './navigation.label';
 import { Overlay } from './Overlay';
 import { SideBarTabWrapper } from './sideBarTab';
+import { useUX } from '@/contexts/UXContext';
 
-export const SideOver = ({
-  openSideOver,
-  toggleOpenSideOver,
-}: {
-  openSideOver: boolean;
-  toggleOpenSideOver: () => void;
-}) => {
+export const SideOver = () => {
+  const { openSideOver, toggleOpenSideOver } = useUX();
+
   return (
     <>
       <Overlay
         onClick={toggleOpenSideOver}
         className="hidden z-199 md:block"
-        conditionValue={openSideOver}
+        open={openSideOver}
       />
 
       <nav
         className={cn(
           openSideOver ? 'translate-x-0' : 'translate-x-full',
-          'fixed inset-y-0 right-0 md:w-1/3 lg:w-1/4 hidden md:flex flex-col transition-transform ease-in-out duration-200 px-3 py-2 border-l z-200 bg-sidebar text-sidebar-foreground border-input'
+          'fixed inset-y-0 right-0 md:w-1/3 lg:w-1/4 hidden md:flex flex-col transition-transform ease-in-out duration-200 px-3 pr-1 py-2 border-l z-200 bg-sidebar text-sidebar-foreground border-input'
         )}
       >
         <MiniProfile

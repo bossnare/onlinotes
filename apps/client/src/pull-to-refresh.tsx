@@ -1,6 +1,6 @@
 import PullToRefresh from 'react-simple-pull-to-refresh';
 
-export default function RefreshWrapper({
+export default function PullToRefreshWrapper({
   children,
   onRefresh,
 }: {
