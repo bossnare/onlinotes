@@ -11,7 +11,7 @@ export const kebabMenuVariants = {
 };
 
 export const fabButtonVariants = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 16 },
   visible: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 10 },
+  exit: { opacity: 0, y: 16 },
 };

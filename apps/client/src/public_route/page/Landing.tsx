@@ -26,7 +26,7 @@ export const LandingPage = () => {
             <div className="hidden gap-3 md:flex">
               <Button
                 size="medium"
-                className="shadow-xs bg-input text-foreground/80"
+                className="shadow-xs bg-background text-foreground"
               >
                 Sign up
               </Button>

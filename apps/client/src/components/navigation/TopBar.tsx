@@ -11,19 +11,13 @@ import { waitVibrate } from '@/utils/vibration';
 import { useAuth } from '@/hooks/use-auth';
 import { KebabMenu } from './KebabMenu';
 import { AnimatePresence } from 'motion/react';
-import { useToggle } from '@/hooks/use-toggle';
-import { SideOver } from './SideOver';
+import { useUX } from '@/contexts/UXContext';
 
-export const TopBar = ({
-  setOpenSide,
-  openSide,
-}: {
-  setOpenSide: React.Dispatch<React.SetStateAction<boolean>>;
-  openSide: boolean;
-}) => {
+export const TopBar = () => {
   const inputId = useId();
   const { user } = useAuth();
-  const { value: openSideOver, toggle: toggleOpenSideOver } = useToggle();
+  const { toggleIsOpenMobileSidebar, isOpenMobileSidebar, toggleOpenSideOver } =
+    useUX();
 
   return (
     <nav className="sticky inset-x-0 top-0 flex items-center gap-2 px-2 py-1 pl-1 border-b shadow-lg h-13 z-99 md:h-14 md:px-2 bg-sidebar border-border">
@@ -32,7 +26,7 @@ export const TopBar = ({
         <ButtonIcon
           onClick={() => {
             waitVibrate(200, 'low');
-            setOpenSide(!openSide);
+            toggleIsOpenMobileSidebar();
           }}
           className="md:hidden"
         >
@@ -79,14 +73,10 @@ export const TopBar = ({
           )}
         </div>
         {/* mobile navigation tab */}
-        <AnimatePresence>{!openSide && <KebabMenu />}</AnimatePresence>
+        <AnimatePresence>
+          {!isOpenMobileSidebar && <KebabMenu />}
+        </AnimatePresence>
       </div>
-
-      {/* prov place, move it in good place later */}
-      <SideOver
-        toggleOpenSideOver={toggleOpenSideOver}
-        openSideOver={openSideOver}
-      />
     </nav>
   );
 };
