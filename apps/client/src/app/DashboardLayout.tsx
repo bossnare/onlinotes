@@ -4,6 +4,7 @@ import { SideOver } from '@/components/navigation/SideOver';
 import { TopBar } from '@/components/navigation/TopBar';
 import PullToRefreshWrapper from '@/components/pull-to-refresh';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { fabButtonVariants } from '@/motions/motion.variant';
 import { useLayoutStore } from '@/stores/UXStore';
@@ -26,7 +27,7 @@ function DashboardLayout() {
 
   return (
     <>
-      <div className="relative max-h-screen overflow-hidden h-dvh">
+      <div className="relative overflow-hidden">
         {/* desktop sidebar */}
         <DesktopSidebar />
         {/* mobile sidebar  */}
@@ -41,16 +42,18 @@ function DashboardLayout() {
                     : 'translateX(0)',
                 }
           }
-          className="relative h-full transition-transform duration-200 ease-in-out will-change-transform md:transition-all md:will-change-auto md:duration-50 md:ml-64"
+          className="relative transition-transform duration-200 ease-in-out will-change-transform md:transition-all md:will-change-auto md:duration-50 md:ml-64"
         >
           <TopBar />
           {/* route content */}
           <PullToRefreshWrapper
             onRefresh={async () => window.location.reload()}
           >
-            <main className=" min-h-full grid-cols-4 gap-2 px-2 py-2 overflow-y-auto md:px-4 overscroll-contain">
-              <Outlet />
-            </main>
+            <ScrollArea className="h-[calc(100dvh-116px)] md:h-[calc(100dvh-56px)]">
+              <main className="pb-[60px] min-h-full px-2 py-2 md:px-4 overscroll-contain">
+                <Outlet />
+              </main>
+            </ScrollArea>
           </PullToRefreshWrapper>
         </div>
         <AnimatePresence>

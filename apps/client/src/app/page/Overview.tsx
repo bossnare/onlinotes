@@ -2,6 +2,8 @@ import { Paragraphe } from '@/components/Paragraphe';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/use-auth';
 
+const labels = ['PayPal', 'Spotify', 'Melodayz'];
+
 function Overview() {
   const { user } = useAuth();
 
@@ -38,6 +40,22 @@ function Overview() {
           <div></div>
           <div></div>
           <div></div>
+        </div>
+
+        <div className="flex gap-4 *:w-[calc(96%/2)] flex-wrap md:*:w-[calc(100%/6)]">
+          {labels.map((l, i) => (
+            <div
+              key={i}
+              className="h-20 has-checked:bg-primary/20 space-x-3 has-checked:ring-primary ring ring-input rounded-md bg-sidebar font-bold text-lg p-6"
+            >
+              <input
+                type="radio"
+                name="paid"
+                className="checked:border-indigo-800 size-3"
+              />
+              <span>{l}</span>
+            </div>
+          ))}
         </div>
       </div>
     </>
