@@ -47,7 +47,7 @@ const sideBarLabel = [
   },
   {
     id: 2,
-    label: 'Apparence',
+    label: 'Appearance',
     icon: Palette,
     route: '/app/search',
   },
