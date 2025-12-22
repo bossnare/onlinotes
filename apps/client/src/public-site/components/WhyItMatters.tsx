@@ -1,5 +1,5 @@
-import { Paragraphe } from '@/shared/components/Paragraphe';
 import { NotebookPen, Brain, Globe } from 'lucide-react';
+import { SectionHeader } from './SectionHeader';
 
 type Props = {
   title?: string;
@@ -9,13 +9,13 @@ type Props = {
 
 function Card({ title, content, Icon }: Props) {
   return (
-    <article className="p-4 space-y-4 transition-transform duration-100 lg:duration-300 ease-in-out border rounded-md will-change-transform active:-translate-y-4 lg:hover:-translate-y-4 border-input bg-card/20">
-      <div className="space-y-3">
-        {Icon ? <Icon /> : null}
-        <h3 className="space-y-3 text-xl font-semibold tracking-tight scroll-m-20">
+    <article className="p-4 space-y-4 transition-transform duration-100 ease-in-out border rounded-md hover:shadow-sm lg:duration-300 will-change-transform active:-translate-y-4 lg:hover:-translate-y-3 border-input bg-card/20">
+      <header className="space-y-3">
+        {Icon ? <Icon sr-only /> : null}
+        <h3 className="space-y-3 text-xl font-semibold tracking-tight md:text-lg scroll-m-20">
           {title}
         </h3>
-      </div>
+      </header>
       <p className="text-secondary/80">{content}</p>
     </article>
   );
@@ -23,13 +23,15 @@ function Card({ title, content, Icon }: Props) {
 
 export const WhyItMatters = () => {
   return (
-    <section id="why-it-matters" className="px-2 py-14 min-h-100 md:px-4">
-      <h2 className="text-3xl font-semibold tracking-tight text-center scroll-m-20 first:mt-0">
-        A space built for thinking, not just typing
-      </h2>
-      <Paragraphe className="text-sm text-center text-muted-foreground">
-        Write freely. Organize ideas. Share knowledge with purpose.
-      </Paragraphe>
+    <section
+      id="why-it-matters"
+      className="px-2 py-14 min-h-100 bg-muted/80 dark:bg-transparent md:px-4"
+    >
+      {/* heading 2 */}
+      <SectionHeader
+        title="A space built for thinking, not just typing"
+        subtext="Write freely. Organize ideas. Share knowledge with purpose."
+      />
       {/* cards */}
       <div className="flex max-w-6xl mx-auto gap-4 mt-10 flex-col md:flex-row flex-wrap justify-center items-center w-full md:*:w-[calc(100%/3-1rem)]">
         <Card

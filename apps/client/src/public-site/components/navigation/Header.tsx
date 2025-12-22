@@ -1,16 +1,35 @@
 import { landingPageLabel } from '@/app/components/navigation/navigation.label';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { heroVariants } from '@/motions/motion.variant';
+import { lineVariants } from '@/motions/motion.variant';
 import { Logo } from '@/shared/components/brand/Logo';
 import { TextAlignJustify } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export const Header = ({ toggleOpenMenu }: { toggleOpenMenu?: () => void }) => {
+  const [scroll, setScroll] = useState(0);
+  const [isNeedBg, setIsNeedBg] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => setScroll(window.scrollY));
+    return () =>
+      window.removeEventListener('scroll', () => setScroll(window.scrollY));
+  }, []);
+
+  useEffect(() => {
+    setIsNeedBg(scroll >= 300);
+  }, [scroll]);
+
   return (
     <header className="fixed inset-x-0 top-0 z-99">
-      <nav className="inset-x-0 top-0 flex items-center justify-between h-12 gap-2 px-2 py-1 pr-1 md:pr-6 md:px-6">
+      <nav
+        className={cn(
+          isNeedBg ? 'bg-background/80 backdrop-blur-md' : 'bg-transparent',
+          'flex items-center justify-between transition-colors h-12 gap-2 px-2 py-1 pr-1 md:pr-6 md:px-6'
+        )}
+      >
         <div className="flex items-center gap-2 shrink-0">
           <Logo />
         </div>
@@ -28,18 +47,18 @@ export const Header = ({ toggleOpenMenu }: { toggleOpenMenu?: () => void }) => {
                           ? 'text-primary'
                           : 'hover:not-focus:opacity-80 active:text-muted-foreground',
                         'relative flex justify-center',
-                        'transition-colors duration-100 ease font-medium'
+                        'transition-colors duration-100 ease-infont-medium'
                       )}
                     >
                       {l.label}
                       <AnimatePresence>
                         {isActive && (
                           <motion.span
-                            variants={heroVariants}
+                            variants={lineVariants}
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            className="absolute rounded-full -bottom-3 size-2 bg-primary"
+                            className="absolute w-1/2 h-1 rounded-full -bottom-3 bg-primary"
                           ></motion.span>
                         )}
                       </AnimatePresence>
@@ -55,7 +74,7 @@ export const Header = ({ toggleOpenMenu }: { toggleOpenMenu?: () => void }) => {
           <div className="flex gap-3 md:gap-4">
             <Button
               size="sm"
-              className="shadow-xs hidden md:inline-flex bg-background text-foreground"
+              className="hidden shadow-xs md:inline-flex bg-background text-foreground"
               variant="ghost"
             >
               Sign up

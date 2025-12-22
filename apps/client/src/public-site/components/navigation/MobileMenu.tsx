@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { landingMenuVariants, traitVariants } from '@/motions/motion.variant';
+import { landingMenuVariants, lineVariants } from '@/motions/motion.variant';
 import { Footer } from '@/shared/components/brand/Footer';
 import { X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
@@ -51,14 +51,14 @@ export const LandingPageMenu = ({
                             ? 'text-primary bg-primary/20 dark:bg-primary/16 w-full'
                             : 'active:text-muted-foreground',
                           'relative flex justify-center',
-                          'transition-colors duration-100 font-bold rounded-sm text-lg ease px-2 flex items-center justify-start h-10'
+                          'transition-colors duration-100 font-bold rounded-sm text-lg ease-inpx-2 flex items-center justify-start h-10'
                         )}
                       >
                         {l.label}
                         <AnimatePresence>
                           {isActive && (
                             <motion.span
-                              variants={traitVariants}
+                              variants={lineVariants}
                               initial="hidden"
                               animate="visible"
                               exit="exit"
