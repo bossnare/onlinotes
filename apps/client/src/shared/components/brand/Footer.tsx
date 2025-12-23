@@ -9,7 +9,7 @@ export const Footer = ({
   const ulClass = 'flex flex-wrap items-center justify-center space-x-4';
 
   return (
-    <div className="text-sm flex flex-col flex-wrap items-center justify-center space-y-2 md:space-x-10 md:flex-row text-muted-foreground [&.line]:text-muted">
+    <div className="text-sm flex flex-col flex-wrap items-center justify-center space-y-2 md:space-x-10 md:flex-row text-muted-foreground [&_.divide]:text-muted-foreground/50">
       {/* footer policy */}
       {content === 'haveContent' && (
         <>
@@ -18,7 +18,7 @@ export const Footer = ({
             <li>
               <Logo size="sm" />
             </li>
-            <span className="line">-</span>
+            <span className="divide">-</span>
             <li>Create Your Second Brain.</li>
           </ul>
           {/* footer links */}
@@ -30,7 +30,7 @@ export const Footer = ({
                 </Button>
               </a>
             </li>
-            <span className="line">|</span>
+            <span className="divide">|</span>
             <li>
               <a href="#">
                 <Button className="p-0 text-muted-foreground" variant="link">
@@ -38,7 +38,7 @@ export const Footer = ({
                 </Button>
               </a>
             </li>
-            <span className="line">|</span>
+            <span className="divide">|</span>
             <li>
               <a href="#">
                 <Button className="p-0 text-muted-foreground" variant="link">
@@ -46,7 +46,7 @@ export const Footer = ({
                 </Button>
               </a>
             </li>
-            <span className="line">|</span>
+            <span className="divide">|</span>
             <li>
               <a href="#">
                 <Button className="p-0 text-muted-foreground" variant="link">
@@ -54,7 +54,7 @@ export const Footer = ({
                 </Button>
               </a>
             </li>
-            <span className="line">|</span>
+            <span className="divide">|</span>
             <li>
               <a href="#">
                 <Button className="p-0 text-muted-foreground" variant="link">
@@ -73,7 +73,7 @@ export const Footer = ({
                 </Button>
               </a>
             </li>
-            <span className="line">♦</span>
+            <span className="divide">♦</span>
 
             <li>
               <a href="#">
@@ -88,7 +88,7 @@ export const Footer = ({
       {/* footer copyright - meta */}
       <div className="space-x-2 text-center">
         <span>&copy; {new Date().getFullYear()}</span>
-        <span className="tracking-tighter text-foreground">Memoroom.</span>
+        <span className="font-medium tracking-tighter">Memoroom .</span>
         <span>All Rights reserved.</span>
         <span>Madagascar {'- Antananarivo'}.</span>
         <span>Built & Powered by</span>

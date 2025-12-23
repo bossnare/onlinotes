@@ -9,7 +9,7 @@ type Props = {
 
 function Card({ title, content, Icon }: Props) {
   return (
-    <article className="p-4 space-y-4 transition-transform duration-100 ease-in-out border rounded-md hover:shadow-sm lg:duration-300 will-change-transform active:-translate-y-4 lg:hover:-translate-y-3 border-input bg-card/20">
+    <article className="p-4 space-y-4 transition-transform duration-100 ease-in-out border rounded-md hover:shadow-sm lg:duration-300 will-change-transform active:-translate-y-4 lg:hover:-translate-y-3 border-input bg-background/80 dark:bg-card/20">
       <header className="space-y-3">
         {Icon ? <Icon sr-only /> : null}
         <h3 className="space-y-3 text-xl font-semibold tracking-tight md:text-lg scroll-m-20">
