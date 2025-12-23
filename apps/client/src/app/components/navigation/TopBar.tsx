@@ -62,9 +62,12 @@ export const TopBar = () => {
           role="button"
           onClick={toggleOpenSideOver}
           title={user?.user_metadata.name.split('(')[0]}
-          className="relative hidden cursor-pointer size-8 md:block active:bg-input md:hover:bg-input active:opacity-60"
+          className="relative hidden cursor-pointer size-8 md:block active:bg-input md:hover:bg-input active:opacity-70"
         >
-          <UserAvatar user={user} className="size-full bg-input" />
+          <UserAvatar
+            user={user}
+            className="size-full bg-input outline-offset-1 outline outline-input"
+          />
           {/* badge */}
           {user && !user.user_metadata.email_verified && (
             <span className="absolute p-1 bg-yellow-200 rounded-full -top-1 -right-1">

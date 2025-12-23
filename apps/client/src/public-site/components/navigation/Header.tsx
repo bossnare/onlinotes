@@ -58,7 +58,7 @@ export const Header = ({ toggleOpenMenu }: { toggleOpenMenu?: () => void }) => {
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            className="absolute w-1/2 h-1 rounded-full -bottom-3 bg-primary"
+                            className="absolute w-1/2 h-1 rounded-full -bottom-2 bg-primary"
                           ></motion.span>
                         )}
                       </AnimatePresence>
