@@ -87,7 +87,7 @@ const LoginCard = ({
                 type="email"
                 name="email"
                 placeholder="Your email and continue..."
-                className="h-10"
+                className="h-12 md:h-10"
               />
               <Button
                 variant="secondary"
