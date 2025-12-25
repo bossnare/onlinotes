@@ -28,7 +28,7 @@ function Hero() {
       {/* box with line */}
       <motion.div
         initial="hidden"
-        whileInView="visible"
+        whileInView={mounted ? 'visible' : ''}
         viewport={{ once: false, amount: 0.3 }}
         variants={{
           hidden: { opacity: 0, y: 20 },
@@ -45,43 +45,39 @@ function Hero() {
         />
       </motion.div>
       <AnimatePresence>
-        {mounted && (
-          <motion.div
-            variants={heroVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            // transition={{
-            //   type: 'spring',
-            //   mass: 0.4,
-            //   stiffness: 600,
-            //   damping: 60,
-            // }}
-            className="z-20 flex flex-col items-center justify-center max-w-lg gap-6 pb-20 md:pb-0"
-          >
-            <span className="space-y-2">
-              <h1 className="text-4xl font-extrabold tracking-tight text-center scroll-m-20 text-balance">
-                Create Your Second Brain
-              </h1>
-              <Paragraphe className="text-sm font-medium text-center text-foreground/80">
-                Organize ideas, share knowledge, and grow together. Your ideas
-                don&apos;t belong alone.
-              </Paragraphe>
-            </span>
+        <motion.div
+          variants={heroVariants}
+          initial="hidden"
+          animate={mounted ? 'visible' : ''}
+          exit="exit"
+          transition={{
+            duration: 0.9,
+            ease: 'easeOut',
+          }}
+          className="z-20 flex flex-col items-center justify-center max-w-lg gap-6 pb-20 md:pb-0"
+        >
+          <span className="space-y-2">
+            <h1 className="text-4xl font-extrabold tracking-tight text-center scroll-m-20 text-balance">
+              Create Your Second Brain
+            </h1>
+            <Paragraphe className="text-sm font-medium text-center text-foreground/80">
+              Organize ideas, share knowledge, and grow together. Your ideas
+              don&apos;t belong alone.
+            </Paragraphe>
+          </span>
 
-            <div className="flex gap-4">
-              <Button variant="secondary" size="lg" className="font-semibold">
-                <Merge />
-                Explore community
+          <div className="flex gap-4">
+            <Button variant="secondary" size="lg" className="font-semibold">
+              <Merge />
+              Explore community
+            </Button>
+            <a href="#why-it-matters">
+              <Button size="lg" className="font-bold">
+                <ArrowDownCircle /> Get started
               </Button>
-              <a href="#why-it-matters">
-                <Button size="lg" className="font-bold">
-                  <ArrowDownCircle /> Get started
-                </Button>
-              </a>
-            </div>
-          </motion.div>
-        )}
+            </a>
+          </div>
+        </motion.div>
       </AnimatePresence>
     </section>
   );

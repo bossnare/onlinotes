@@ -78,7 +78,7 @@ export const Header = ({
         </div>
 
         <div className="flex items-center justify-end gap-3 md:gap-4">
-          <ModeToggle className="hidden md:block" />
+          <ModeToggle className="hidden md:inline-flex" />
 
           <div className="flex gap-3 md:gap-4">
             <Button
