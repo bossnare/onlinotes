@@ -61,7 +61,7 @@ const LoginCard = ({
             <div className="relative space-y-4">
               {/* close button */}
               <span className="absolute -right-4 -top-4">
-                <Button onClick={toggle} variant="ghost" size="icon">
+                <Button onClick={toggle} variant="ghost" size="icon-sm">
                   <X />
                 </Button>
               </span>
@@ -75,7 +75,7 @@ const LoginCard = ({
                 </Paragraphe>
               </header>
 
-              <div className="flex flex-col justify-center gap-4 py-3 lg:flex-row">
+              <div className="flex flex-col justify-center gap-3 py-3 md:gap-4 lg:flex-row">
                 <span className="sr-only">Sign in with OAuth provider</span>
                 <Button
                   onClick={() =>
