@@ -10,6 +10,8 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.4917 0.1623 287.47);
+  --primary-hover: oklch(0.4359 0.1535 286.01); /* hover: #4E3DA0 */
+
   /* --primary: oklch(0.5628 0.183457 254.7); */
   --primary-foreground: oklch(0.9592 0.0093 252.86);
   /* --primary: oklch(0.205 0 0);
@@ -72,10 +74,11 @@
   --popover-foreground: oklch(0.985 0 0);
   /* --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0); */
-  --primary: oklch(0.4917 0.1623 287.47);
+  --primary: oklch(0.5274 0.1697 282.9); /* #6157C8 */
+  --primary-hover: oklch(0.4359 0.1535 286.01); /* hover: #4E3DA0 */
 
   /* --primary: oklch(0.5628 0.183457 254.7); */
-  --primary-foreground: oklch(0.9592 0.0093 252.86);
+  --primary-foreground: oklch(0.9283 0.0055 274.96);
   --secondary: oklch(0.985 0 0);
   --secondary-foreground: oklch(0.269 0 0);
   --muted: oklch(0.269 0 0);
@@ -131,6 +134,7 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
