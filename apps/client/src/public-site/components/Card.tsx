@@ -81,14 +81,15 @@ const LoginCard = ({
                 <span className="sr-only">Sign in with OAuth provider</span>
                 <Button
                   onClick={() => {
-                    handleWait(async () => {
+                    // use handleWait for UX (interaction, retour)
+                    handleWait(() => {
                       setIsPending();
                       toggle();
-                      try {
-                        await AuthService.googleSign();
-                      } catch (e) {
-                        if (e) setIsPendingFalse();
-                      }
+                      AuthService.googleSign();
+                      // give a exact time for set to false loading state
+                      setTimeout(() => {
+                        setIsPendingFalse();
+                      }, 10_000);
                     }, 250);
                   }}
                   variant="provider"
@@ -104,14 +105,18 @@ const LoginCard = ({
                   {t('auth.button.OAuth.with')} Google
                 </Button>
                 <Button
-                  onClick={() =>
-                    handleWait(async () => {
+                  onClick={() => {
+                    // use handleWait for UX (interaction, retour)
+                    handleWait(() => {
                       setIsPending();
                       toggle();
-                      await AuthService.githubSign();
-                      setIsPendingFalse();
-                    }, 250)
-                  }
+                      AuthService.githubSign();
+                      // give a exact time for set to false loading state
+                      setTimeout(() => {
+                        setIsPendingFalse();
+                      }, 10_000);
+                    }, 250);
+                  }}
                   className="rounded-full md:rounded-md"
                   variant="provider"
                   size={providerButtonSize}
