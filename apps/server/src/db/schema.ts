@@ -12,7 +12,7 @@ export const profiles = pgTable('profiles', {
 
 export const notes = pgTable('notes', {
   id: varchar('id', { length: 24 }).primaryKey().$default(nanoid),
-  userId: varchar('user_id', { length: 24 }).references(() => profiles.id, {
+  userId: uuid('user_id').references(() => profiles.id, {
     onDelete: 'cascade',
   }),
   title: text('title').notNull(),
