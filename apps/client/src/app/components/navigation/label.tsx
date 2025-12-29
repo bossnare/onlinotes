@@ -49,25 +49,25 @@ const sideBarLabel = [
     id: 2,
     label: 'Appearance',
     icon: Palette,
-    route: '/app/search',
+    route: '/app/appearance',
   },
   {
     id: 3,
     label: 'Authentication',
     icon: KeyRound,
-    route: '/app/notification',
+    route: '/app/authentication',
   },
   {
     id: 4,
     label: 'Trash',
     icon: Trash2,
-    route: '/app/tags',
+    route: '/app/trash',
   },
   {
     id: 5,
     label: 'Log out',
     icon: PowerOff,
-    route: '/app/tags',
+    route: '#',
   },
 ];
 

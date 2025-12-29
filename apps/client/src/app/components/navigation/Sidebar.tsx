@@ -6,9 +6,11 @@ import { useLayoutStore } from '@/stores/layoutStore';
 import { waitVibrate } from '@/utils/vibration';
 import { PanelLeftClose, PanelLeftOpen, Plus, Settings } from 'lucide-react';
 import { Overlay } from '../../../shared/components/Overlay';
-import { desctructiveLabel, sideBarLabel } from './label';
+import { desctructiveLabel, sideBarLabel, tabLabel } from './label';
 import { NavTab } from './NavTab';
 import { SideBarTabWrapper } from './sideBarTab';
+import { NavLink } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 type SidebarProps = React.HTMLAttributes<HTMLDivElement> & {
   ref?: React.Ref<HTMLDivElement>;
@@ -35,26 +37,71 @@ export const MobileSidebar = ({ ref, ...props }: SidebarProps) => {
         ref={ref}
         className={`${
           open ? 'translate-x-0' : '-translate-x-full'
-        } md:hidden transition-transform will-change-transform text-sidebar-foreground duration-200 px-4 py-2 z-50 ease-in-out w-6/7 bg-background fixed inset-y-0 border-r border-sidebar-border overflow-hidden`}
+        } md:hidden transition-transform will-change-transform text-sidebar-foreground overflow-y-auto duration-200 px-4 py-2 z-50 ease-in-out w-4/5 bg-background fixed inset-y-0 border-r border-sidebar-border overflow-hidden`}
       >
-        <aside className={`relative size-full rounded-xl overflow-y-auto`}>
+        <aside className={`relative size-full rounded-xl`}>
           <MiniProfile
             btnAction={
-              <Button variant="ghost" size="icon-lg">
+              <Button
+                onClick={() => setOpen(false)}
+                variant="ghost"
+                size="icon-lg"
+              >
                 <Settings />
               </Button>
             }
           />
-          <div className="h-1 my-4 border-t border-sidebar-border"></div>
 
+          <div className="h-1 my-4 border-t border-sidebar-border"></div>
           <ul className="flex flex-col gap-3 font-medium">
+            {/* tab label map & interact */}
+            {tabLabel.map((t) => (
+              <li key={t.id}>
+                <NavLink title={t.label} to={t.route} end={t.route === '/app'}>
+                  {({ isActive }) => (
+                    <button
+                      onClick={() => setOpen(false)}
+                      className={cn(
+                        isActive
+                          ? 'font-bold text-sidebar-foreground'
+                          : 'font-normal active:bg-muted',
+                        'text-lg flex gap-3 px-2 py-2 items-center w-full'
+                      )}
+                    >
+                      {t.label === 'Search' ? (
+                        <t.icon
+                          className="size-5"
+                          weight={isActive ? 'fill' : 'regular'}
+                        />
+                      ) : (
+                        <t.icon className="size-5" />
+                      )}{' '}
+                      {t.label}
+                    </button>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+
             {sideBarLabel.map((s) => (
               <>
                 {s.hiddenOnMobile ? null : (
                   <li key={s.id}>
-                    <SideBarTabWrapper>
-                      <s.icon className="size-5" /> {s.label}
-                    </SideBarTabWrapper>
+                    <NavLink to={s.route}>
+                      {({ isActive }) => (
+                        <button
+                          onClick={() => setOpen(false)}
+                          className={cn(
+                            isActive
+                              ? 'font-bold text-sidebar-foreground'
+                              : 'active:bg-muted',
+                            'text-lg flex gap-3 px-2 py-2 items-center w-full'
+                          )}
+                        >
+                          <s.icon className="size-5" /> {s.label}
+                        </button>
+                      )}
+                    </NavLink>
                   </li>
                 )}
               </>
@@ -69,16 +116,6 @@ export const MobileSidebar = ({ ref, ...props }: SidebarProps) => {
               ))}
             </>
           </ul>
-          <div className="absolute inset-x-0 w-full px-2 bottom-2 active:bg-muted">
-            <Button
-              onClick={async () => await supabase.auth.signOut()}
-              size="lg"
-              variant="outline"
-              className="w-full"
-            >
-              Logout
-            </Button>
-          </div>
         </aside>
       </div>
     </>
