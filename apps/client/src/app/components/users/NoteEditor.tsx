@@ -25,7 +25,7 @@ export const NoteEditor = ({
           className="fixed top-0 left-0 bg-background size-full lg:w-[calc(100%-16rem)] z-999 lg:absolute lg:left-64 lg:top-14"
         >
           <nav className="flex justify-between w-full px-2 py-2 pb-4 lg:px-4">
-            <button onClick={close} className="text-primary active:opacity-80">
+            <button onClick={close} className="text-primary font-semibold active:opacity-80">
               Cancel
             </button>
             <Button className="font-bold select-none" variant="ghost">
