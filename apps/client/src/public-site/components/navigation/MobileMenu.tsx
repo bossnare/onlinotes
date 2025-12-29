@@ -56,10 +56,10 @@ export const MobileMenu = ({
                           onClick={() => handleWait(toggle, 200)}
                           className={cn(
                             isActive
-                              ? 'text-primary bg-primary/20 dark:bg-primary/16 w-full'
+                              ? 'text-primary bg-primary/20 dark:bg-primary/16'
                               : 'active:text-muted-foreground',
                             'relative flex justify-center',
-                            'transition-colors duration-100 font-bold rounded-sm text-lg ease px-2 flex items-center justify-start h-10'
+                            'transition-colors duration-100 font-bold rounded-sm text-lg w-full ease px-2 flex items-center justify-start h-10'
                           )}
                         >
                           {l.label}

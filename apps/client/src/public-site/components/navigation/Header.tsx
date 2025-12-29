@@ -11,23 +11,18 @@ import { useTranslation } from 'react-i18next';
 import { useLabel } from '@/public-site/hooks/use-label';
 import { useLayoutStore } from '@/public-site/store/layoutStore';
 import { handleWait } from '@/utils/handle-wait';
-import { LogoWithPagename } from '@/shared/components/brand/LogoWithPagename';
+import { Back } from '@/public-site/components/navigation/Back';
 
 export const Header = ({ toggleOpenMenu }: { toggleOpenMenu?: () => void }) => {
   const [scroll, setScroll] = useState(0);
   const [isNeedBg, setIsNeedBg] = useState(false);
-  const [isNeedLogo, setIsNeedLogo] = useState<boolean | undefined>();
-
   const navbarLabel = useLabel();
   const { t } = useTranslation();
   const setLoginOpen = useLayoutStore((s) => s.setLoginOpen);
 
   // Logo optional rendering
-  const location = useLocation();
-
-  useEffect(() => {
-    setIsNeedLogo(location.pathname === '/');
-  }, [location.pathname]);
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
 
   useEffect(() => {
     window.addEventListener('scroll', () => setScroll(window.scrollY));
@@ -43,18 +38,14 @@ export const Header = ({ toggleOpenMenu }: { toggleOpenMenu?: () => void }) => {
     <header className="fixed inset-x-0 top-0 z-50">
       <nav
         className={cn(
-          isNeedBg ? 'bg-background/80 backdrop-blur-md' : 'bg-transparent',
+          isHome && !isNeedBg
+            ? 'bg-transparent'
+            : 'bg-background/80 backdrop-blur-md',
           'flex items-center flex-wrap md:justify-end justify-between transition-colors min-h-12 gap-2 px-2 py-1 pr-1 md:pr-6 md:px-6'
         )}
       >
         <div className="flex items-center shrink-0 lg:min-w-1/5">
-          {isNeedLogo ? (
-            <Logo />
-          ) : (
-            <div>
-              <LogoWithPagename />
-            </div>
-          )}
+          {isHome ? <Logo /> : <Back />}
         </div>
 
         {/* nav */}
