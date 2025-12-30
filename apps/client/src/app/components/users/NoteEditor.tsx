@@ -36,7 +36,7 @@ export const NoteEditor = () => {
           </Button>
         </nav>
 
-        <main className="flex flex-col h-[calc(100%-6.5rem)] py-2 space-y-3">
+        <main className="flex flex-col min-h-[calc(100%-6.5rem)] py-2 space-y-3">
           <textarea
             rows={1}
             className="text-3xl py-1 scrollbar-none tracking-tight leading-10 font-bold placeholder:text-2xl w-full resize-none focus:outline-0"
@@ -44,10 +44,9 @@ export const NoteEditor = () => {
             value={title}
             onInput={(e) => {
               setTitle(e.currentTarget.value);
+              e.currentTarget.style.height = 'auto'; // initial reset height value
               e.currentTarget.style.height =
                 e.currentTarget.scrollHeight + 'px';
-              if (!e.currentTarget.value.trim())
-                e.currentTarget.style.height = 'auto';
             }}
             onBlur={() => setTitle(title.trim())}
           ></textarea>
