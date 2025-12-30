@@ -3,9 +3,11 @@ import { Header } from '@/public-site/components/navigation/Header';
 import { MobileMenu } from '@/public-site/components/navigation/MobileMenu';
 import { Footer } from '@/shared/components/brand/Footer';
 import { LoadingCard, LoginCard } from '@/public-site/components/Card';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
 export const PublicLayout = () => {
+  const navigate = useNavigate();
+
   const {
     value: isPending,
     setTrue: setIsPending,
@@ -13,12 +15,18 @@ export const PublicLayout = () => {
   } = useToggle();
   const { value: openMenu, toggle: toggleOpenMenu } = useToggle();
 
+  const [params] = useSearchParams();
+  const auth = params.get('auth');
+  const loginOpen = auth === 'login';
+
   return (
     <div className="relative h-screen">
       <LoadingCard open={isPending} />
       <LoginCard
         setIsPendingFalse={setIsPendingFalse}
         setIsPending={setIsPending}
+        open={loginOpen}
+        close={() => navigate(-1) || navigate('/', { replace: true })}
       />
       {/* header */}
       <Header toggleOpenMenu={toggleOpenMenu} />

@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { useIsPublicRoute } from '@/hooks/useIsPublicRoute';
 import { Route, Routes } from 'react-router-dom';
 import { ProtectedRoutes } from './ProtectedRoutes';
-import { PublicLayout } from '@/public-site/PublicLayout';
+import { PublicLayout } from '@/public-site/layout/PublicLayout';
 import { NotFound } from '@/shared/components/not-found';
 import { SignUp } from '@/public-site/page/Signup';
 import { PublicRoutes } from './PublicRoutes';
