@@ -5,11 +5,10 @@ import { Logo } from '@/shared/components/brand/Logo';
 import { TextAlignJustify } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { ModeToggle } from '@/components/mode-toggle';
 import { useTranslation } from 'react-i18next';
 import { useLabel } from '@/public-site/hooks/use-label';
-import { useLayoutStore } from '@/public-site/store/layoutStore';
 import { handleWait } from '@/utils/handle-wait';
 import { Back } from '@/public-site/components/navigation/Back';
 
@@ -18,10 +17,11 @@ export const Header = ({ toggleOpenMenu }: { toggleOpenMenu?: () => void }) => {
   const [isNeedBg, setIsNeedBg] = useState(false);
   const navbarLabel = useLabel();
   const { t } = useTranslation();
-  const setLoginOpen = useLayoutStore((s) => s.setLoginOpen);
 
   // Logo optional rendering
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
   const isHome = pathname === '/';
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export const Header = ({ toggleOpenMenu }: { toggleOpenMenu?: () => void }) => {
               {t('auth.button.signup')}
             </Button>
             <Button
-              onClick={() => handleWait(() => setLoginOpen(true), 200)}
+              onClick={() => handleWait(() => navigate('?auth=login'), 200)}
               size="sm"
               variant="secondary"
               className="font-bold"

@@ -5,7 +5,7 @@ import { handleWait } from '@/utils/handle-wait';
 import { useInView } from 'motion/react';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLayoutStore } from '../store/layoutStore';
+import { useNavigate } from 'react-router-dom';
 
 export function FooterCTA() {
   const ref = useRef(null);
@@ -13,7 +13,7 @@ export function FooterCTA() {
   const ctaSize = useButtonSize({ mobile: 'xl', landscape: 'lg' });
   const ctaVariant = isInView ? 'default' : 'outline';
   const { t } = useTranslation();
-  const setLoginOpen = useLayoutStore((s) => s.setLoginOpen);
+  const navigate = useNavigate();
 
   return (
     <section
@@ -22,7 +22,7 @@ export function FooterCTA() {
     >
       <div ref={ref} className="text-center">
         <Button
-          onClick={() => handleWait(() => setLoginOpen(true), 300)}
+          onClick={() => handleWait(() => navigate('?auth=login'), 300)}
           size={ctaSize}
           variant={ctaVariant}
           className="font-bold transition-colors duration-300 border-0 rounded-full shadow-lg shadow-primary dark:brightness-120"

@@ -12,7 +12,6 @@ import { Spinner } from '@/shared/components/Spinner';
 import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useButtonSize } from '@/hooks/use-button-size';
-import { useLayoutStore } from '../store/layoutStore';
 
 const LoadingCard = ({ open }: { open?: boolean }) => {
   const { t } = useTranslation();
@@ -35,9 +34,13 @@ const LoadingCard = ({ open }: { open?: boolean }) => {
 const LoginCard = ({
   setIsPending,
   setIsPendingFalse,
+  open,
+  close,
 }: {
   setIsPending: () => void;
   setIsPendingFalse: () => void;
+  open?: boolean;
+  close: () => void;
 }) => {
   const providerButtonSize = useButtonSize({
     landscape: 'default',
@@ -45,15 +48,11 @@ const LoginCard = ({
   });
   const { t } = useTranslation();
 
-  const loginOpen = useLayoutStore((s) => s.loginOpen);
-  const toggleLoginOpen = useLayoutStore((s) => s.toggleLoginOpen);
-  const setLoginOpen = useLayoutStore((s) => s.setLoginOpen);
-
   return (
     <>
-      <Overlay onClick={toggleLoginOpen} open={loginOpen} className="z-99" />
+      <Overlay onClick={close} open={open} className="z-99" />
       <AnimatePresence>
-        {loginOpen && (
+        {open && (
           <motion.div
             variants={overlayVariants}
             initial="hidden"
@@ -64,11 +63,7 @@ const LoginCard = ({
             <div className="relative space-y-4">
               {/* close button */}
               <span className="absolute -right-4 -top-4">
-                <Button
-                  onClick={() => setLoginOpen(false)}
-                  variant="ghost"
-                  size="icon-sm"
-                >
+                <Button onClick={close} variant="ghost" size="icon-sm">
                   <X />
                 </Button>
               </span>
@@ -89,7 +84,7 @@ const LoginCard = ({
                     // use handleWait for UX (interaction, retour)
                     handleWait(() => {
                       setIsPending();
-                      toggleLoginOpen();
+                      close();
                       AuthService.googleSign();
                       // give a exact time for set to false loading state
                       setTimeout(() => {
@@ -114,7 +109,7 @@ const LoginCard = ({
                     // use handleWait for UX (interaction, retour)
                     handleWait(() => {
                       setIsPending();
-                      toggleLoginOpen();
+                      close();
                       AuthService.githubSign();
                       // give a exact time for set to false loading state
                       setTimeout(() => {

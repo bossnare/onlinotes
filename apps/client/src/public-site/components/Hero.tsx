@@ -7,13 +7,13 @@ import { handleWait } from '@/utils/handle-wait';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLayoutStore } from '../store/layoutStore';
+import { useNavigate } from 'react-router-dom';
 
 function Hero() {
   const [mounted, setMounted] = useState(false);
   const { t } = useTranslation();
   const heroButtonSize = useButtonSize({ mobile: 'xl', landscape: 'lg' });
-  const setLoginOpen = useLayoutStore((s) => s.setLoginOpen);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -74,7 +74,7 @@ function Hero() {
 
           <div className="flex flex-col items-center gap-2 md:flex-row md:gap-4">
             <Button
-              onClick={() => handleWait(() => setLoginOpen(true), 300)}
+              onClick={() => handleWait(() => navigate('?auth=login'), 300)}
               size={heroButtonSize}
               className="w-auto font-bold rounded-full md:rounded-lg md:order-2"
             >
