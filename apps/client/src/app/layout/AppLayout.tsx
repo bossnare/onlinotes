@@ -68,9 +68,9 @@ function DashboardLayout() {
   }, []);
 
   // auto-collapsed sidebar
-  useEffect(() => {
-    if (!isMobile && openMobileSidebar) navigate(-1);
-  }, [isMobile, openMobileSidebar, navigate]);
+  // useEffect(() => {
+  //   if (!isMobile) navigate(-1);
+  // }, [isMobile, openMobileSidebar, navigate]);
 
   useEffect(() => {
     setIsOpenPanel(isDesktop);
@@ -120,7 +120,7 @@ function DashboardLayout() {
                 onClick={() => {
                   setAppLoading(true);
                   handleWait(async () => {
-                    await navigate('/note/new');
+                    await navigate('/app/note/new');
                     setAppLoading(false);
                   }, 600);
                 }}

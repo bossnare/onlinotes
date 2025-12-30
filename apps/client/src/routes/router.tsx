@@ -55,7 +55,7 @@ export const AppRoutes = () => {
             </Route>
 
             {/* notes */}
-            <Route path="/note" element={<MiniLayout />}>
+            <Route path="/app/note" element={<MiniLayout />}>
               <Route path="new" element={<NoteEditor />} />
             </Route>
           </Route>
