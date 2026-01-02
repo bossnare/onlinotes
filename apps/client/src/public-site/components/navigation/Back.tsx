@@ -1,7 +1,7 @@
+import { usePathname } from '@/shared/hooks/use-pathname';
+import { cn } from '@/app/lib/utils';
 import { Button } from '@/components/ui/button';
-import { usePathname } from '@/hooks/use-pathname';
-import { cn } from '@/lib/utils';
-import { handleWait } from '@/utils/handle-wait';
+import { handleWait } from '@/shared/utils/handle-wait';
 import { ArrowLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,7 @@ export const Back = ({ className, fallbackRoute = '/', ...props }: Props) => {
   const navigate = useNavigate();
 
   return (
-    <div {...props} className={cn(' flex items-center gap-3', className)}>
+    <div {...props} className={cn(' flex items-center gap-1', className)}>
       <Button
         onClick={() =>
           handleWait(

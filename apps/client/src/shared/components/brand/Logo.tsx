@@ -1,8 +1,14 @@
-import logo from '@/assets/icon_mono.svg';
-import { cn } from '@/lib/utils';
-type Props = React.HTMLAttributes<HTMLDivElement> & { size?: 'sm' | 'lg' };
+import { cn } from '@/app/lib/utils';
+import iconMono from '@/assets/icon_mono.svg';
+import icon from '@/assets/icon.svg';
+// import iconDark from '@/assets/icon_dark.svg';
 
-export const Logo = ({ className, size = 'lg', ...props }: Props) => {
+type Props = React.HTMLAttributes<HTMLDivElement> & {
+  size?: 'sm' | 'lg';
+  mono?: boolean;
+};
+
+export const Logo = ({ mono, className, size = 'lg', ...props }: Props) => {
   const dflt = 'flex font-extrabold leading-none tracking-tighter select-none';
   const lg = 'text-[21px] lg:text-2xl';
   const sm = 'text-[18px] lg:text-[20px]';
@@ -21,13 +27,33 @@ export const Logo = ({ className, size = 'lg', ...props }: Props) => {
         className
       )}
     >
-      <img
-        src={logo}
-        fetchPriority="high"
-        loading="eager"
-        alt="logo"
-        className={cn(iconSize, 'shrink-0! dark:invert')}
-      />
+      {mono ? (
+        <img
+          src={iconMono}
+          fetchPriority="high"
+          loading="eager"
+          alt="logo"
+          className={cn(iconSize, 'shrink-0! invert dark:invert-0')}
+        />
+      ) : (
+        <span>
+          <img
+            src={icon}
+            fetchPriority="high"
+            loading="eager"
+            alt="logo"
+            className={cn(iconSize, 'shrink-0!')}
+          />
+          {/* <img
+            src={iconDark}
+            fetchPriority="high"
+            loading="eager"
+            alt="logo"
+            className={cn(iconSize, 'shrink-0! hidden dark:block')}
+          /> */}
+        </span>
+      )}
+
       <span className={cn(dflt, sz[size], 'text-foreground')}>memoroom</span>
     </div>
   );
