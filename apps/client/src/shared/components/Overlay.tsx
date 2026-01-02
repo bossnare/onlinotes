@@ -10,7 +10,7 @@ export const Overlay = ({ open, className, ...props }: OverlayProps) => {
       {...props}
       className={cn(
         open
-          ? 'opacity-100 pointer-events-auto'
+          ? 'opacity-100 pointer-events-auto active:invert lg:active:invert-0'
           : 'opacity-0 pointer-events-none',
         'inset-0 transition-opacity duration-300 ease-in-out bg-black/50 fixed',
         className

@@ -11,7 +11,7 @@ import { TextAlignJustify } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const Header = () => {
   const [scroll, setScroll] = useState(0);
@@ -19,10 +19,13 @@ export const Header = () => {
   const navbarLabel = useLabel();
   const { t } = useTranslation();
   const { open: openLogin } = useQueryToggle({ key: 'auth', value: 'login' })!;
+  const { open: openMobileMenu } = useQueryToggle({
+    key: 'menu',
+    value: 'mobile',
+  })!;
 
   // Logo optional rendering
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const isHome = pathname === '/';
 
@@ -52,7 +55,7 @@ export const Header = () => {
 
         {/* nav */}
         <div className="hidden md:flex grow">
-          <ul className="flex md:gap-4 lg:gap-8 text-accent-foreground *:px-2 mx-auto text-sm">
+          <ul className="flex md:gap-4 lg:gap-8 *:px-2 mx-auto text-sm">
             {navbarLabel.map((l) => (
               <li key={l.id}>
                 <NavLink to={l.route}>
@@ -60,10 +63,10 @@ export const Header = () => {
                     <button
                       className={cn(
                         isActive
-                          ? 'text-primary'
-                          : 'hover:not-focus:opacity-80 active:text-muted-foreground',
+                          ? 'text-foreground font-bold'
+                          : 'hover:not-focus:opacity-80 active:text-muted-foreground text-foreground/80 font-medium',
                         'relative flex justify-center',
-                        'transition-colors duration-100 ease-infont-medium'
+                        'transition-colors duration-100 ease-in'
                       )}
                     >
                       {l.label}
@@ -74,7 +77,7 @@ export const Header = () => {
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            className="absolute w-1/2 h-1 rounded-full -bottom-2 bg-primary"
+                            className="absolute w-1/2 h-1 rounded-full -bottom-2 bg-foreground"
                           ></motion.span>
                         )}
                       </AnimatePresence>
@@ -107,7 +110,7 @@ export const Header = () => {
           <Button
             size="icon-lg"
             variant="ghost"
-            onClick={() => navigate('?menu=mobileMenu')}
+            onClick={openMobileMenu}
             className="md:hidden"
           >
             <TextAlignJustify className="size-[26px]" />

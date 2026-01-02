@@ -19,11 +19,11 @@ function Card({ title, content, number }: Props) {
         visible: { opacity: 1, x: 0 },
       }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="p-4 space-y-4 transition-transform duration-100 ease-in-out border rounded-md border-input dark:border-0 card hover:shadow-sm lg:duration-300 will-change-transform active:translate-x-4 bg-card dark:bg-card/40"
+      className="p-4 space-y-4 transition-transform duration-100 ease-in-out border rounded-md border-input dark:border-0 hover:shadow-sm lg:duration-300 will-change-transform active:translate-x-4 bg-card dark:bg-card/40"
     >
       <header className="flex flex-col gap-3 md:gap-2 md:flex-row md:items-center">
-        <div className="flex items-center justify-center rounded-full bg-secondary size-8 md:size-7">
-          <span className="font-black tracking-tight text-secondary-foreground">
+        <div className="flex items-center justify-center rounded-full border border-primary bg-primary dark:bg-primary/60 size-8 md:size-7">
+          <span className="font-black tracking-tight text-primary-foreground">
             0{number}
           </span>
         </div>
@@ -67,7 +67,7 @@ export function HowItWorks() {
         {cardContents.map((c, i) => (
           <>
             <Card title={c.title} content={c.content} number={i + 1} />
-            <span className="h-8 ml-8 border-l-2 border-dashed divide md:ml-0 md:border-b md:h-auto md:w-8 lg:w-auto border-foreground/90 dark:border-input"></span>
+            <span className="h-8 ml-8 border-l-2 border-dashed divide md:ml-0 md:border-b md:h-auto md:w-8 lg:w-auto border-primary dark:border-input"></span>
           </>
         ))}
       </div>

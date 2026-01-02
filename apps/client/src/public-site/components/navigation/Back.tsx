@@ -15,7 +15,7 @@ export const Back = ({ className, fallbackRoute = '/', ...props }: Props) => {
   const navigate = useNavigate();
 
   return (
-    <div {...props} className={cn(' flex items-center gap-3', className)}>
+    <div {...props} className={cn(' flex items-center gap-1', className)}>
       <Button
         onClick={() =>
           handleWait(

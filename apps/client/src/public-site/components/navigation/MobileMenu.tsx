@@ -7,7 +7,6 @@ import {
   landingMenuVariants,
   lineVariants,
 } from '@/shared/motions/motion.variant';
-import { handleWait } from '@/shared/utils/handle-wait';
 import { X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { NavLink } from 'react-router-dom';
@@ -56,7 +55,6 @@ export const MobileMenu = ({
                     <NavLink to={l.route}>
                       {({ isActive }) => (
                         <button
-                          onClick={() => handleWait(close, 200)}
                           className={cn(
                             isActive
                               ? 'text-primary bg-primary/20 dark:bg-primary/16'
