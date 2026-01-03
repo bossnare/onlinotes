@@ -58,6 +58,9 @@
   .scroll-touch {
     -webkit-overflow-scrolling: touch;
   }
+  .bottom-keyboard-height {
+    bottom: var(--keyboard-height);
+  }
 }
 
 @layer base {

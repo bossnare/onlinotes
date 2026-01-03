@@ -36,6 +36,21 @@ export const NoteEditor = () => {
     if (areaRef.current) areaRef.current.focus();
   }, []);
 
+  // get keyboard height
+  useEffect(() => {
+    if (!window.visualViewport) return;
+
+    const update = () => {
+      document.documentElement.style.setProperty(
+        '--keyboard-height',
+        `${window.innerHeight - window.visualViewport!.height || 0}px`
+      );
+    };
+
+    visualViewport?.addEventListener('resize', update);
+    return () => visualViewport?.removeEventListener('resize', update);
+  });
+
   return (
     <>
       <motion.div
@@ -125,7 +140,7 @@ export const NoteEditor = () => {
           </div>
         </main>
 
-        <footer className="sticky bottom-0 bg-sidebar/50">
+        <footer className="sticky bottom-keyboard-height bg-sidebar/50">
           <div className="max-w-6xl px-4 mx-auto h-14 bg-muted"></div>
         </footer>
       </motion.div>
