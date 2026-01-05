@@ -47,9 +47,9 @@ function Notification() {
 
   return (
     <>
-      <div className="max-w-4xl min-h-screen px-1 mx-auto md:px-6 bg-primary/5">
+      <div className="max-w-4xl min-h-screen px-1 mx-auto md:px-6 bg-primary/10">
         <>
-          <header className="pt-2 lg:pt-8">
+          <header className="pt-4 lg:pt-8">
             <div className="flex justify-between">
               <div className="flex items-center gap-2">
                 <Button

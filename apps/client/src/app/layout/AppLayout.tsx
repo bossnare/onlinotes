@@ -100,7 +100,7 @@ export function AppLayout() {
             onRefresh={async () => window.location.reload()}
           >
             <ScrollArea className="h-[calc(100dvh-116px)] md:h-[calc(100dvh-56px)] scroll-touch overscroll-contain">
-              <main className="pb-[60px] min-h-full">
+              <main className="pb-[60px] lg:pb-0 min-h-full">
                 <Outlet />
               </main>
             </ScrollArea>
