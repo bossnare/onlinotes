@@ -1,7 +1,6 @@
 import { relations } from 'drizzle-orm';
-import { authUsers } from 'drizzle-orm/supabase'; // supase users tables
-import { pgTable, varchar, timestamp, text, uuid } from 'drizzle-orm/pg-core';
-import { nanoid } from 'nanoid';
+import { authUsers } from 'drizzle-orm/supabase'; // supabase users tables
+import { pgTable, boolean, timestamp, text, uuid } from 'drizzle-orm/pg-core';
 
 export const profiles = pgTable('profiles', {
   id: uuid('id')
@@ -11,13 +10,25 @@ export const profiles = pgTable('profiles', {
 });
 
 export const notes = pgTable('notes', {
-  id: varchar('id', { length: 24 }).primaryKey().$default(nanoid),
+  id: uuid('id').defaultRandom().primaryKey(),
   userId: uuid('user_id').references(() => profiles.id, {
     onDelete: 'cascade',
   }),
   title: text('title').notNull(),
   content: text('content').notNull(),
   color: text('color'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+export const notifications = pgTable('notifications', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id').references(() => profiles.id, {
+    onDelete: 'cascade',
+  }),
+  title: text('title').notNull(),
+  message: text('message').notNull(),
+  isRead: boolean('is_read').default(false).notNull(),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 });
