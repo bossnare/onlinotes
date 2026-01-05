@@ -8,6 +8,8 @@ export const notesRoute = new Elysia({
 })
   .get('/', async ({ set, headers }) => {
     const token = headers.authorization?.split(' ')[1] as string;
+    if (!token) throw new Error('Unauthorized');
+
     const { id } = await UsersService.getUserFromToken(token);
     const { data, count } = await NotesService.getMyAll(id);
     set.status = 200;
