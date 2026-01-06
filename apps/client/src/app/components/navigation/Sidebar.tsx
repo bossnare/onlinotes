@@ -28,7 +28,7 @@ export const MobileSidebar = ({
       <Overlay
         className="z-40 dark:bg-white/40 md:hidden"
         onClick={() => {
-          waitVibrate(200, 'low');
+          waitVibrate(300, 'low');
           close();
         }}
         open={open}
@@ -39,7 +39,7 @@ export const MobileSidebar = ({
         ref={ref}
         className={`${
           open ? 'translate-x-0' : '-translate-x-full'
-        } md:hidden transition-transform will-change-transform text-sidebar-foreground overflow-y-auto duration-200 px-4 py-2 z-50 ease-in-out w-4/5 bg-background fixed inset-y-0 border-r border-sidebar-border/30 overflow-hidden`}
+        } md:hidden transition-transform will-change-transform text-sidebar-foreground overflow-y-auto duration-280 px-4 py-2 z-50 ease-in-out w-5/6 bg-background fixed inset-y-0 border-r border-sidebar-border/30 overflow-hidden`}
       >
         <aside className={`relative size-full rounded-xl`}>
           <MiniProfile />
@@ -124,7 +124,7 @@ export const DesktopSidebar = ({
       style={{ width: `${width}px` }}
       {...props}
       ref={ref}
-      className="fixed inset-y-0 z-20 hidden duration-100 ease-in-out border-r transition-all md:max-w-[60px] lg:max-w-64 text-sidebar-foreground bg-sidebar md:block border-sidebar-border"
+      className="fixed inset-y-0 z-20 hidden duration-100 ease-in-out border-r transition-all md:max-w-[62px] lg:max-w-64 text-sidebar-foreground bg-sidebar md:block border-sidebar-border"
     >
       <div className="items-center justify-between hidden w-full px-3 py-3 pr-2 lg:flex ">
         {isOpenPanel && <Logo />}

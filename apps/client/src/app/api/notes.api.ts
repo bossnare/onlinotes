@@ -10,7 +10,7 @@ export function useNote() {
       const res = await fetcher('/notes');
       return res.data; // return {.., data}
     },
-    staleTime: 3_000, // 3 sec
+    staleTime: 0,
     // cacheTime: 1000 * 60 * 5, // 5 min
     gcTime: 2 * 60 * 100, // 2 min
     refetchOnWindowFocus: true,

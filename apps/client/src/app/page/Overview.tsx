@@ -4,17 +4,27 @@ import { Button } from '@/components/ui/button';
 // import { X } from 'lucide-react';
 import { Spinner } from '@/shared/components/Spinner';
 import { useNote } from '../api/notes.api';
-import { ArrowDownNarrowWide } from 'lucide-react';
+import { ArrowDownNarrowWide, ListRestart } from 'lucide-react';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import type { NoteInterface } from '@/app/types/note.interface';
 import { EmptyEmpty as EmptyNotes } from '../components/users/Empty';
+import { useButtonSize } from '@/shared/hooks/use-button-size';
+import { useQueryClient } from '@tanstack/react-query';
 
 function Overview() {
   const { data, isPending, isError, error, refetch } = useNote();
   const notes = data as NoteInterface[];
+  const buttonSize = useButtonSize({ mobile: 'icon-lg', landscape: 'icon' });
 
   const isMobile = useIsMobile();
   const spinnerSize = !isMobile ? 'default' : 'lg';
+
+  const queryClient = useQueryClient();
+  const handleRefreshNotes = () =>
+    queryClient.refetchQueries({
+      queryKey: ['notes'],
+    });
+  console.log('refetch');
 
   if (notes?.length < 1)
     return (
@@ -75,8 +85,16 @@ function Overview() {
               <h3 className="text-2xl font-medium tracking-tight scroll-m-20">
                 All notes
               </h3>
-              <div className="gap-4">
-                <Button variant="ghost" size="icon-lg">
+              <div className="gap-4 flex">
+                <Button
+                  onClick={handleRefreshNotes}
+                  variant="ghost"
+                  className="hidden md:inline-flex"
+                  size="icon"
+                >
+                  <ListRestart />
+                </Button>
+                <Button variant="ghost" size={buttonSize}>
                   <ArrowDownNarrowWide />
                 </Button>
               </div>
@@ -86,8 +104,9 @@ function Overview() {
             <div className="grid grid-cols-2 lg:grid-cols-4 pt-4 gap-3 flex-wrap">
               {notes?.map((note) => (
                 <div
+                  role="button"
                   key={note.id}
-                  className="bg-background cursor-pointer dark:bg-muted/80 lg:shadow-sm min-h-30 flex flex-col gap-4 rounded-3xl lg:rounded-xl p-4"
+                  className="bg-background select-none dark:hover:bg-muted active:opacity-80 cursor-pointer dark:bg-muted/80 lg:shadow-sm min-h-30 flex flex-col gap-4 rounded-3xl lg:rounded-xl p-4"
                 >
                   <span className="text-lg md:text-base font-bold truncate line-clamp-2">
                     {note.title || 'Untitled'}

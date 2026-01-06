@@ -67,7 +67,7 @@ function Notification() {
                   Notifications
                 </h3>
               </div>
-              <div className="gap-4">
+              <div className="gap-4 mr-4">
                 <Button variant="ghost" size="icon-lg">
                   <ArrowDownNarrowWide />
                 </Button>
@@ -83,8 +83,8 @@ function Notification() {
                   className={cn(
                     notif.isRead
                       ? 'bg-transparent'
-                      : 'bg-blue-100/80 dark:bg-primary/12',
-                    'select-none flex flex-col gap-1 lg:flex-row lg:gap-4 p-2 px-4 cursor-pointer active:bg-muted! hover:opacity-80 lg:rounded-lg'
+                      : 'bg-blue-100/80 hover:bg-blue-100/90 dark:bg-primary/12 dark:hover:bg-primary/20',
+                    'select-none flex flex-col gap-1 lg:flex-row active:bg-muted! lg:gap-4 p-2 px-4 cursor-pointer'
                   )}
                 >
                   <div className="flex flex-col gap-3 grow">
@@ -95,7 +95,7 @@ function Notification() {
                       {notif.message}
                     </span>
                   </div>
-                  <div className="text-sm shrink-0 text-muted-foreground">
+                  <div className="text-sm lg:text-xs shrink-0 text-muted-foreground">
                     {timeAgo(notif.createdAt)}
                   </div>
                 </div>
