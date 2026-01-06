@@ -12,7 +12,7 @@ export const Tab = ({
   const activeClass =
     ' font-semibold text-sidebar-foreground dark:md:bg-input/80 md:bg-secondary md:text-secondary-foreground dark:md:text-sidebar-foreground';
   const defaultClass =
-    'relative transition-colors overflow-hidden duration-300 md:duration-100 ease-in-out rounded-full active:bg-muted-foreground/10 flex items-center justify-center md:justify-start md:rounded-sm w-full cursor-pointer gap-3 p-3 md:px-2 md:h-9 ease-in-out';
+    'relative transition-colors overflow-hidden duration-300 md:duration-100 ease-in-out rounded-full active:bg-muted-foreground/10 flex items-center justify-center md:justify-start md:rounded-sm w-full cursor-pointer gap-4 p-3 md:px-2 md:h-9 ease-in-out';
   const inactiveClass =
     'font-medium md:hover:opacity-80 text-muted-foreground md:text-current md:hover:bg-muted';
 
@@ -23,10 +23,10 @@ export const Tab = ({
       {label === 'Search' ? (
         <Icon
           weight={isActive ? 'fill' : 'bold'}
-          className="shrink-0 md:size-5 size-7"
+          className="shrink-0 md:size-[22px] size-7"
         />
       ) : (
-        <Icon className="shrink-0 md:size-5 size-7" />
+        <Icon className="shrink-0 md:size-[22px] size-7" />
       )}
       <span className="hidden lg:block">{label}</span>
       {/* underline */}

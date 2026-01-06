@@ -53,7 +53,7 @@
         "loading": {
             "OAuthState": "wait just a second"
         },
-        "textDivide": "or",
+        "textDivide": "OR",
         "button": {
             "signup": "Sign up",
             "signin": "Sign in",
