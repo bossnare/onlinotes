@@ -35,7 +35,7 @@ function Overview() {
 
   if (isError)
     return (
-      <div className="mx-auto max-w-lg py-10 lg:py-20 gap-4 items-center flex flex-col">
+      <div className="flex flex-col items-center max-w-lg gap-4 py-10 mx-auto lg:py-20">
         <span className="text-center">{error.message}</span>
         <Button
           onClick={async () => refetch()}
@@ -49,14 +49,14 @@ function Overview() {
 
   if (isPending)
     return (
-      <div className="flex h-100 items-center justify-center py-10">
+      <div className="flex items-center justify-center py-10 h-100">
         <Spinner variant="invert" size={spinnerSize} />
       </div>
     );
 
   return (
     <>
-      <div className="px-3 md:px-6 min-h-screen bg-muted dark:bg-background">
+      <div className="min-h-screen px-3 md:px-6 bg-muted dark:bg-background">
         {/* <div className="relative flex flex-col w-full gap-2 p-4 rounded-lg shadow-xs md:p-3 bg-muted dark:bg-muted/60">
           <h4 className="font-bold">Complete your profile</h4>
           <div className="flex flex-col justify-center gap-3 md:items-center md:flex-row md:justify-between">
@@ -85,7 +85,7 @@ function Overview() {
               <h3 className="text-2xl font-medium tracking-tight scroll-m-20">
                 All notes
               </h3>
-              <div className="gap-4 flex">
+              <div className="flex gap-4">
                 <Button
                   onClick={handleRefreshNotes}
                   variant="ghost"
@@ -96,7 +96,7 @@ function Overview() {
                 </Button>
                 <Button
                   variant="ghost"
-                  className="transition-colors"
+                  className="transition-colors!"
                   size={buttonSize}
                 >
                   <ArrowDownNarrowWide />
@@ -105,17 +105,17 @@ function Overview() {
             </div>
           </header>
           <main>
-            <div className="grid grid-cols-2 lg:grid-cols-4 pt-4 gap-3 flex-wrap">
+            <div className="grid flex-wrap grid-cols-2 gap-3 pt-4 lg:grid-cols-4">
               {notes?.map((note) => (
                 <div
                   role="button"
                   key={note.id}
-                  className="bg-background select-none dark:hover:bg-muted active:opacity-80 cursor-pointer dark:bg-muted/80 lg:shadow-sm min-h-30 flex flex-col gap-4 rounded-3xl lg:rounded-xl p-4"
+                  className="flex flex-col gap-4 p-4 cursor-pointer select-none bg-background group hover:bg-background/80 dark:hover:bg-muted active:opacity-80 dark:bg-muted/80 lg:shadow-sm min-h-30 rounded-3xl lg:rounded-xl"
                 >
-                  <span className="text-lg md:text-base font-bold truncate line-clamp-2">
+                  <span className="text-lg font-bold truncate md:text-base line-clamp-2">
                     {note.title || 'Untitled'}
                   </span>
-                  <span className="opacity-70 truncate text-wrap md:text-sm line-clamp-3">
+                  <span className="truncate transition-colors group-active:text-foreground text-muted-foreground text-wrap md:text-sm line-clamp-3">
                     {note.content}
                   </span>
                 </div>

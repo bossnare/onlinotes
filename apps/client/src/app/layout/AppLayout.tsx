@@ -19,6 +19,7 @@ import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { useQueryToggle } from '@/shared/hooks/use-query-toggle';
 import { fabButtonVariants } from '@/shared/motions/motion.variant';
 import { handleWait } from '@/shared/utils/handle-wait';
+import { useQueryClient } from '@tanstack/react-query';
 import { SquarePen } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
@@ -30,6 +31,12 @@ export function AppLayout() {
   const setIsOpenPanel = useLayoutStore((s) => s.setIsOpenPanel);
   const appLoading = useLayoutStore((s) => s.appLoading);
   const setAppLoading = useLayoutStore((s) => s.setAppLoading);
+
+  const queryClient = useQueryClient();
+  const handleRefreshNotes = () =>
+    queryClient.refetchQueries({
+      queryKey: ['notes'],
+    });
 
   // query params state
   const { isOpen: isOpenMobileSidebar, close: closeMobileSidebar } =
@@ -92,13 +99,11 @@ export function AppLayout() {
         {/* main content */}
         <div
           style={MAIN_TRANSFORM}
-          className="relative transition-transform duration-280 ease-in-out will-change-transform md:duration-100"
+          className="relative transition-transform ease-in-out duration-280 will-change-transform md:duration-100"
         >
           <TopBar />
           {/* route content */}
-          <PullToRefreshWrapper
-            onRefresh={async () => window.location.reload()}
-          >
+          <PullToRefreshWrapper onRefresh={async () => handleRefreshNotes()}>
             <ScrollArea className="h-[calc(100dvh-116px)] md:h-[calc(100dvh-56px)] scroll-touch overscroll-contain">
               <main className="pb-[60px] lg:pb-0 min-h-full">
                 <Outlet />
