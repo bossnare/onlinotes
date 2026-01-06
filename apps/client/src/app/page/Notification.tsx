@@ -83,7 +83,7 @@ function Notification() {
                   className={cn(
                     notif.isRead
                       ? 'bg-transparent'
-                      : 'bg-blue-100/80 hover:bg-blue-100/90 dark:bg-primary/12 dark:hover:bg-primary/20',
+                      : 'bg-blue-100/80 hover:bg-blue-100/90 dark:bg-primary/18 dark:lg:hover:bg-primary/22',
                     'select-none flex flex-col gap-1 lg:flex-row active:bg-muted! lg:gap-4 p-2 px-4 cursor-pointer'
                   )}
                 >
