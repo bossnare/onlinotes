@@ -18,6 +18,7 @@ export function useNote() {
       const res = await fetcher(`/notes?${params}`);
       return res.data; // return {.., data}
     },
+    staleTime: 0,
   });
 }
 
