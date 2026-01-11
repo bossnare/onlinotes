@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 // import { Paragraphe } from '@/shared/components/Paragraphe';
 // import { useAuth } from '@/shared/hooks/use-auth';
 // import { X } from 'lucide-react';
-import type { NoteInterface } from '@/app/types/note.interface';
 import { Spinner } from '@/shared/components/Spinner';
 import { useButtonSize } from '@/shared/hooks/use-button-size';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
@@ -29,7 +28,7 @@ import { Portal } from '@radix-ui/react-portal';
 
 function Overview() {
   const { data, isPending, isError, error, refetch } = useNote();
-  const notes = data as NoteInterface[];
+  const notes = data ?? [];
   const buttonSize = useButtonSize({ mobile: 'icon-lg', landscape: 'icon' });
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
@@ -135,10 +134,10 @@ function Overview() {
     }
   }, [isSelectionMode]);
 
-  if (notes?.length < 1)
+  if (isPending)
     return (
-      <div className="py-4">
-        <EmptyNotes />
+      <div className="flex items-center justify-center py-10 h-100">
+        <Spinner variant="invert" size={spinnerSize} />
       </div>
     );
 
@@ -156,10 +155,10 @@ function Overview() {
       </div>
     );
 
-  if (isPending)
+  if (notes?.length < 1)
     return (
-      <div className="flex items-center justify-center py-10 h-100">
-        <Spinner variant="invert" size={spinnerSize} />
+      <div className="py-4">
+        <EmptyNotes />
       </div>
     );
 
