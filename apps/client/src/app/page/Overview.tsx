@@ -20,13 +20,16 @@ import { useEffect, useRef, useState } from 'react';
 import { useNote } from '../api/notes.api';
 import { OrderDrawer } from '../components/users/Drawer';
 import { EmptyEmpty as EmptyNotes } from '../components/users/Empty';
-import { dateUltraFormat } from '../lib/dateUltraFormat';
+import { dateUltraFormat } from '../lib/date-format';
 import { cn } from '../lib/utils';
 import { motion } from 'motion/react';
 import { SelectModeNoteTooltip } from '../components/users/SelectModeNoteTooltip';
 import { Portal } from '@radix-ui/react-portal';
+import { useNavigate } from 'react-router-dom';
 
 function Overview() {
+  const navigate = useNavigate();
+
   const { data, isPending, isError, error, refetch } = useNote();
   const notes = data ?? [];
   const buttonSize = useButtonSize({ mobile: 'icon-lg', landscape: 'icon' });
@@ -278,6 +281,7 @@ function Overview() {
                   onTouchStart={() => handleTouchStart(note.id)}
                   onClick={() => {
                     if (isSelectionMode) toggleSelect(note.id);
+                    else navigate(`/note/${note.id}/edit`);
                   }}
                   onTouchEnd={handleTouchEnd}
                   onTouchMove={handleTouchMove}
