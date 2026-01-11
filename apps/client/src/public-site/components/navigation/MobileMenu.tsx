@@ -31,9 +31,9 @@ export const MobileMenu = ({
   useEffect(() => {
     if (!isMobile) return;
     if (open) {
-      document.body.classList.add('hidden');
+      document.body.classList.add('overflow-hidden');
     } else {
-      document.body.classList.remove('hidden');
+      document.body.classList.remove('overflow-hidden');
     }
   }, [isMobile, open]);
 
