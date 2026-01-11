@@ -145,7 +145,7 @@ function Overview() {
   if (isPending)
     return (
       <div className="flex items-center justify-center py-10 h-100">
-        <Spinner variant="invert" />
+        <Spinner />
       </div>
     );
 
