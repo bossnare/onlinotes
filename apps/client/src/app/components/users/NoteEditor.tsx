@@ -26,6 +26,16 @@ export const NoteEditor = ({
   mode = 'edit',
   note,
 }: NoteEditorProps) => {
+  const contentAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [chars, setChars] = useState(0);
+  const [title, setTitle] = useState<string | undefined>('');
+  const [content, setContent] = useState<string | undefined>('');
+  const [initial, setInitial] = useState<{
+    title: string | undefined;
+    content: string | undefined;
+  } | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+
   const isMobile = useIsMobile();
   const navigate = useNavigate();
 
@@ -35,25 +45,20 @@ export const NoteEditor = ({
     edit: 'Edit',
     view: 'View',
   };
+  const saveMode = {
+    new: 'Create note',
+    edit: 'Save changes',
+    view: 'Read note',
+  };
   const editorState = editorMode[mode];
-
-  // transform
-  const { value: isOpenToolTip, toggle: toggleOpenTooltip } = useToggle(true);
-
-  const { pannelWidth: TOOLTIP_WIDTH, mainTransform: MAIN_TRANSFORM } =
-    usePannel(isOpenToolTip, MIN_TOOLTIP_WIDTH, MAX_TOOLTIP_WIDTH);
-
-  const contentAreaRef = useRef<HTMLTextAreaElement | null>(null);
-  const [chars, setChars] = useState(0);
-  const [title, setTitle] = useState<string | undefined>('');
-  const [content, setContent] = useState<string | undefined>('');
+  const saveButtonText = saveMode[mode];
 
   // initial fill
   useEffect(() => {
     if (isEdit) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTitle(note?.title);
       setContent(note?.content);
+      setInitial({ title: note?.title, content: note?.content });
     }
   }, [isEdit, note]);
 
@@ -66,6 +71,14 @@ export const NoteEditor = ({
       }
     }, 100);
   }, []);
+
+  // transform
+  const { value: isOpenToolTip, toggle: toggleOpenTooltip } = useToggle(true);
+
+  const { pannelWidth: TOOLTIP_WIDTH, mainTransform: MAIN_TRANSFORM } =
+    usePannel(isOpenToolTip, MIN_TOOLTIP_WIDTH, MAX_TOOLTIP_WIDTH);
+
+  const isDirty = title !== initial?.title || content !== initial?.content;
 
   const autoGrow = (e: React.FormEvent<HTMLTextAreaElement>) => {
     e.currentTarget.style.height = 'auto'; // initial reset height value
@@ -82,20 +95,37 @@ export const NoteEditor = ({
   };
 
   const handleCreateNote = async () => {
+    setIsSaving(true);
     try {
       const res = await api.post('/notes/create', body);
       console.log(res.data);
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsSaving(false);
     }
   };
 
   const handleUpdateNote = async () => {
+    setIsSaving(true);
     try {
       const res = await api.put(`/notes/update/${note?.id}`, body);
       console.log(res.data);
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const canSave = title?.trim() || content?.trim();
+
+  const handleCancel = () => {
+    if (canSave && isDirty) {
+      handleSave();
+      navigate(-1);
+    } else {
+      navigate(-1);
     }
   };
 
@@ -126,14 +156,14 @@ export const NoteEditor = ({
           <header className="sticky top-0 left-0 bg-background">
             <div className="flex items-center justify-between h-12 max-w-6xl px-4 mx-auto">
               <button
-                onClick={() => navigate(-1)}
+                onClick={handleCancel}
                 className="p-0 font-semibold text-primary active:opacity-80"
               >
                 Cancel
               </button>
               <span className="text-muted-foreground">{editorState} notes</span>
               <Button
-                disabled={!content?.trim()}
+                disabled={!canSave || !isDirty}
                 onClick={() => {
                   handleSave();
                   handleWait(() => navigate(-1), 200);
@@ -141,7 +171,7 @@ export const NoteEditor = ({
                 className="font-bold select-none"
                 variant="ghost"
               >
-                Save
+                {isSaving ? 'saving...' : saveButtonText}
               </Button>
             </div>
           </header>
