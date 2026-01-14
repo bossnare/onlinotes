@@ -32,7 +32,7 @@ export class NotesService {
     const sortOrder = order ?? 'desc';
 
     const data = await this.prisma.note.findMany({
-      where: { userId },
+      where: { userId, deleted: false },
       orderBy: { [sortField]: sortOrder },
     });
 
@@ -59,19 +59,99 @@ export class NotesService {
   }
 
   async update(id: string, updateNoteDto: UpdateNoteDto) {
-    const updatedNote = await this.prisma.note.update({
+    await this.prisma.note.update({
       where: { id },
       data: { ...updateNoteDto, edited: true, numberOfEdits: { increment: 1 } },
     });
 
     return {
       success: true,
+      message: 'notes updated',
       timestamps: Date.now(),
-      data: updatedNote,
     };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} note`;
+  async softRemoveOne(id: string) {
+    await this.prisma.note.update({
+      where: { id },
+      data: { deleted: true, deletedAt: new Date() },
+    });
+
+    return {
+      success: true,
+      message: 'Note moved to trash',
+      timestamps: Date.now(),
+    };
+  }
+
+  async softRemoveMany(idsToRemove: string[]) {
+    if (!idsToRemove.length) {
+      return {
+        idsToRemove,
+      };
+    }
+    const result = await this.prisma.note.updateMany({
+      where: { id: { in: idsToRemove }, deletedAt: null },
+      data: { deleted: true, deletedAt: new Date() },
+    });
+
+    return {
+      success: true,
+      message: 'Notes moved to trash',
+      count: result.count,
+      timestamps: Date.now(),
+    };
+  }
+
+  async restoreOne(id: string) {
+    await this.prisma.note.update({
+      where: { id },
+      data: { deleted: false, deletedAt: null },
+    });
+
+    return {
+      success: true,
+      message: 'Note restored',
+      timestamps: Date.now(),
+    };
+  }
+
+  async restoreMany(idsToRestore: string[]) {
+    const result = await this.prisma.note.updateMany({
+      where: { id: { in: idsToRestore }, deletedAt: { not: null } },
+      data: { deleted: false, deletedAt: null },
+    });
+
+    return {
+      success: true,
+      message: 'Notes restored',
+      count: result.count,
+      timestamps: Date.now(),
+    };
+  }
+
+  async removeOne(id: string) {
+    await this.prisma.note.delete({
+      where: { id },
+    });
+
+    return {
+      success: true,
+      message: 'Note permanently deleted',
+      timestamps: Date.now(),
+    };
+  }
+
+  async removeMany(idsToRemove: string[]) {
+    const result = await this.prisma.note.deleteMany({
+      where: { id: { in: idsToRemove } },
+    });
+
+    return {
+      success: true,
+      message: 'Note permanently deleted',
+      count: result.count,
+      timestamps: Date.now(),
+    };
   }
 }
