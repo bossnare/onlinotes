@@ -52,7 +52,7 @@ function Overview() {
     open: openNoteSorting,
     isOpen: isOpenNoteSorting,
     close: closeNoteSorting,
-  } = useQueryToggle({ key: 'ui', value: 'noteSorting' })!;
+  } = useQueryToggle({ key: 'sorting', value: 'noteSorting' })!;
   // selection query params state
   const {
     open: openSelectionMode,
@@ -191,6 +191,7 @@ function Overview() {
           confirmLabel={deleteConfirmLabel}
           isOpen={isOpenDeleteConfirm}
           onClose={closeDeleteConfirm}
+          buttonVariant={'secondary'}
           onConfirm={() => {
             handleDelete();
             closeSelectionMode();
@@ -204,6 +205,7 @@ function Overview() {
           confirmLabel={deleteConfirmLabel}
           isOpen={isOpenDeleteConfirm}
           onClose={closeDeleteConfirm}
+          buttonVariant={'secondary'}
           onConfirm={() => {
             handleDelete();
             closeSelectionMode();
@@ -216,7 +218,7 @@ function Overview() {
         />
         {/* content */}
         <>
-          <header className="sticky top-0 z-20 mx-2 px-2 md:px-2 pt-8 md:mx-5 bg-muted dark:bg-background">
+          <header className="sticky top-0 z-20 px-2 pt-8 mx-2 md:px-2 md:mx-5 bg-muted dark:bg-background">
             {isSelectionMode ? (
               <motion.div
                 initial={{ opacity: 0 }}
