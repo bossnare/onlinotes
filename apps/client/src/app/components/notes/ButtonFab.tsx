@@ -9,7 +9,7 @@ export function ButtonFab({ openChoose }: { openChoose?: () => void }) {
   const longPress = useLongPress({
     onLongPress: () => {
       openChoose?.();
-      waitVibrate(350, 'low');
+      waitVibrate(400, 'low');
     },
   });
 
