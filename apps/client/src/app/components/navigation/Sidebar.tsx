@@ -43,9 +43,10 @@ export const MobileSidebar = ({
         } md:hidden transition-transform will-change-transform text-sidebar-foreground overflow-y-auto duration-300 px-4 py-2 z-50 ease-in-out w-5/6 bg-background fixed inset-y-0 border-r border-sidebar-border/30 overflow-hidden`}
       >
         <aside className={`relative size-full rounded-xl`}>
-          <MiniProfile />
+          <MiniProfile className="active:bg-muted active:opacity-80" />
 
-          <div className="h-1 my-4 border-t border-sidebar-border"></div>
+          <div className="my-4 border-t border-sidebar-border"></div>
+
           <ul className="flex flex-col gap-3 font-medium">
             {/* tab label map & interact */}
             {tabLabel.map((t) => (
@@ -54,14 +55,15 @@ export const MobileSidebar = ({
                   {({ isActive }) => (
                     <button
                       className={cn(
-                        isActive
-                          ? 'font-bold text-sidebar-foreground'
-                          : 'font-normal text-sidebar-foreground/90',
-                        'text-xl flex gap-4 px-2 py-2 items-center w-full active:bg-muted'
+                        isActive ? 'font-bold' : 'font-normal',
+                        'text-xl flex gap-4 px-2 py-2 items-center w-full active:bg-muted text-sidebar-foreground'
                       )}
                     >
                       {t.label === 'Search' ? (
-                        <t.icon weight={isActive ? 'fill' : 'bold'} />
+                        <t.icon
+                          className="size-6"
+                          weight={isActive ? 'fill' : 'bold'}
+                        />
                       ) : (
                         <t.icon />
                       )}{' '}
@@ -127,7 +129,7 @@ export const DesktopSidebar = ({
       className="fixed inset-y-0 z-20 hidden duration-100 ease-in-out border-r transition-all md:max-w-[62px] lg:max-w-64 text-sidebar-foreground bg-sidebar md:block border-sidebar-border"
     >
       <div className="items-center justify-between hidden w-full px-3 py-3 pr-2 lg:flex ">
-        {isOpenPanel && <Logo />}
+        {isOpenPanel && <Logo mono={true} />}
         <Button
           title="Ctrl+T"
           onClick={toggleOpenPanel}
@@ -146,7 +148,7 @@ export const DesktopSidebar = ({
           </ul>
         </nav>
 
-        <div className="h-1 my-2 border-t border-sidebar-border"></div>
+        <div className="my-3 border-t border-sidebar-border"></div>
 
         {/* drag and drop file */}
         {isOpenPanel ? (

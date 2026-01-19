@@ -49,7 +49,7 @@ export const TopBar = () => {
           <TextAlignJustify className="hidden dark:inline-flex size-[26px]" />
           <TextAlignStart className="dark:hidden size-[26px]" />
         </Button>
-        <Logo className="md:hidden" />
+        <Logo mono={true} className="md:hidden" />
       </div>
       {/* desktop navigation */}
       <div className="hidden h-10 py-1 px-2 rounded-md bg-input gap-2 md:inline-flex md:w-[50%] lg:w-[36%] items-center shrink-0">
