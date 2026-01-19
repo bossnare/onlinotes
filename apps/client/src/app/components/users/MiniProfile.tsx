@@ -1,13 +1,16 @@
 import { useAuth } from '@/shared/hooks/use-auth';
 import { UserAvatar } from './UserAvatar';
+import { cn } from '@/app/lib/utils';
 
-export const MiniProfile = ({ btnAction }: { btnAction?: React.ReactNode }) => {
+type Props = React.HTMLAttributes<HTMLDivElement>;
+
+export const MiniProfile = ({ className }: Props) => {
   const { user } = useAuth();
 
   return (
-    <div className="flex items-center gap-3 mb-4">
+    <div className={cn('flex items-center select-none gap-3 mb-4', className)}>
       <UserAvatar user={user} />
-      <div className="flex flex-col -space-y-1 overflow-hidden grow">
+      <div className="flex flex-col -space-y-1 overflow-hidden">
         <span className="text-lg font-bold tracking-tight truncate md:text-base line-clamp-1">
           {user?.user_metadata.name.split(' (')[0] || 'User Diary'}
         </span>
@@ -15,7 +18,6 @@ export const MiniProfile = ({ btnAction }: { btnAction?: React.ReactNode }) => {
           {user?.user_metadata.email_verified && 'View your profile'}
         </span>
       </div>
-      <div className="ml-auto shrink-0">{btnAction}</div>
     </div>
   );
 };

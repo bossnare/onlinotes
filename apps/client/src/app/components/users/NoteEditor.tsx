@@ -206,6 +206,7 @@ export const NoteEditor = ({
         confirmLabel={isDirtyConfirmLabel}
         isOpen={isOpenDirtyConfirm}
         onClose={closeDirtyConfirm}
+        buttonVariant={'destructive'}
         onConfirm={async () => {
           await navigate(-2);
         }}
@@ -219,6 +220,7 @@ export const NoteEditor = ({
         confirmLabel={isDirtyConfirmLabel}
         isOpen={isOpenDirtyConfirm}
         onClose={closeDirtyConfirm}
+        buttonVariant={'destructive'}
         onConfirm={async () => {
           await navigate(-2);
         }}

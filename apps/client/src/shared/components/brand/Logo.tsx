@@ -32,16 +32,14 @@ export const Logo = ({ mono, className, size = 'lg', ...props }: Props) => {
         <img
           src={iconMono}
           fetchPriority="high"
-          loading="eager"
           alt="logo"
-          className={cn(iconSize, 'shrink-0! invert dark:invert-0')}
+          className={cn(iconSize, 'shrink-0! invert')}
         />
       ) : (
         <span>
           <img
             src={icon}
             fetchPriority="high"
-            loading="eager"
             alt="logo"
             className={cn(iconSize, 'shrink-0!')}
           />
